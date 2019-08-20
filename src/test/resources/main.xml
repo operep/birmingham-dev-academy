@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="UI Test" parallel="classes" thread-count="10">
+<!--    <listeners>-->
+<!--        <listener class-name="com.sampleweb.listeners.TestListener"/>-->
+<!--    </listeners>-->
+    <test name="UI Test">
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <packages>
+            <package name=".*"/>
+        </packages>
+    </test>
+</suite> 
