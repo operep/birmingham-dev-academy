@@ -20,7 +20,7 @@ public class ToysTests extends BaseTest {
     @BeforeMethod
     public void setUp() throws Exception {
         toysAndGamesPage = navigator.navigateToPage(driver, ToysAndGamesPage.PATH, ToysAndGamesPage.class);
-        toysAndGamesPage.selectToys();
+        //toysAndGamesPage.selectToys();
     }
 
     //@Test(groups = "regression")
@@ -59,4 +59,8 @@ public class ToysTests extends BaseTest {
         assertThat(toysAndGamesPage.verifyClickInMenu(), is(true));
     }
 
+    @Test(groups = "regression")
+    public void verifyPrimeTest(){
+        assertThat(toysAndGamesPage.verifyPrime(), is(true));
+    }
 }

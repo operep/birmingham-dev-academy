@@ -8,8 +8,12 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class ToysAndGamesPage extends HomePage {
     public String title = "Toys & Games";
     public String pageTitle = "//h1[text()=\"Toys & Games\"]";
-    public static String PATH = "https://www.amazon.co.uk";
+    public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dtoys&field-keywords=";
     protected String dropDownLocator = "//*[@id=\"searchDropdownBox\"]/option[43]";
+
+    private String amazonPrimeCheckbox = "//input[@name=\"s-ref-checkbox-419158031\"]";
+    private String allProducts = "//*[@class='s-result-list s-search-results sg-row']";
+    private String labels = "//span[@class=\"aok-inline-block s-image-logo-view\"] | //span[@class=\"a-size-base a-color-secondary\"]";
 
     public ToysAndGamesPage(RemoteWebDriver driver) {
         super(driver);
@@ -63,9 +67,15 @@ public class ToysAndGamesPage extends HomePage {
         }
     }
 
-//    public boolean verifyPrime(){
-//        driver.findElementByXPath("//*[@id=\"leftNav\"]/ul[6]/div/li[1]/span/span/div/label/input").click();
-//    }
+    public boolean checkPrimeBox(){
+        driver.findElementByXPath(amazonPrimeCheckbox).click();
+        return true;
+    }
+
+    public boolean verifyPrime(){
+        checkPrimeBox();
+        return driver.findElements(By.xpath(allProducts)).iterator().next().findElement(By.xpath(labels)).isDisplayed();
+    }
 }
 
 
