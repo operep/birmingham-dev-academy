@@ -2,7 +2,6 @@ package com.sampleweb.journey;
 
 import com.sampleweb.BaseTest;
 import com.sampleweb.framework.PageNavigator;
-import com.sampleweb.pages.HomePage;
 import com.sampleweb.pages.LargeAppliancesPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,7 +14,7 @@ public class LargeAppliancesTests extends BaseTest {
     private LargeAppliancesPage largeAppliancesPage;
 
     public void setUp() throws Exception {
-        largeAppliancesPage = navigator.navigateToPage(driver, LargeAppliancesPage.LARGE_APPLIANCES_PATH, LargeAppliancesPage.class);
+        largeAppliancesPage = navigator.navigateToPage(driver, LargeAppliancesPage.PATH, LargeAppliancesPage.class);
     }
 
     @Test (groups = "regression")
