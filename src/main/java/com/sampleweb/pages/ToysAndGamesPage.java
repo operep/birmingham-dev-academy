@@ -23,11 +23,6 @@ public class ToysAndGamesPage extends HomePage {
         return driver.findElement(By.xpath(pageTitle)).isDisplayed();
     }
 
-    public ToysAndGamesPage setSearchCriteria(String searchText) {
-        getSearchField().sendKeys(searchText);
-        return this;
-    }
-
     public void selectToys() {
         driver.findElementByXPath(dropDownLocator).click();
         getSearchField().sendKeys("");
