@@ -37,31 +37,31 @@ public class AntoniaTests extends BaseTest {
     public void electronicsPhotoNavigationPageTest() throws Exception {
         isInitialTest = true;
         setUp();
-        assertThat(electronicsPhotoPage.isLoaded(), is(true));
+        assertThat(electronicsPhotoPage.isPageLoaded(), is(true));
     }
 
     @Test(groups = "regression")
     public void globalStoreCategoryTest() throws Exception {
         setUp();
-        assertThat(electronicsPhotoPage.isGlobalStore(), is(true));
+        assertThat(electronicsPhotoPage.isGlobalStoreDisplayed(), is(true));
     }
 
     @Test(groups = "regression")
     public void avgCategoryTest() throws Exception {
         setUp();
-        assertThat(electronicsPhotoPage.isAvgCustomerReview(), is(true));
+        assertThat(electronicsPhotoPage.isAvgCustomerReviewDisplayed(), is(true));
     }
 
     @Test(groups = "regression")
     public void secondLineLinkTest() throws Exception {
         setUp();
-        assertThat(electronicsPhotoPage.isSecondLineLink(), is(true));
+        assertThat(electronicsPhotoPage.isSecondLineLinkDisplayed(), is(true));
     }
 
     @Test(groups = "regression")
     public void compareInitialAndReloadTitle() throws Exception {
         setUp();
-        assertThat(electronicsPhotoPage.checkTitleAfterReload(), is(true));
+        assertThat(electronicsPhotoPage.isTitleSameAfterReload(), is(true));
     }
 
     @Test(groups = "regression")
@@ -69,14 +69,4 @@ public class AntoniaTests extends BaseTest {
         setUp();
         electronicsPhotoPage.checkPrimeLabels();
     }
-
-
-
-
-
-
-
-
-
-
 }

@@ -33,27 +33,27 @@ public class ElectronicsPhotoPage extends HomePage {
     }
 
     // 1
-    public boolean isLoaded(){
+    public boolean isPageLoaded(){
         return driver.findElement(By.xpath(pageTitle)).isDisplayed();
     }
 
     // 2
-    public boolean isGlobalStore(){
+    public boolean isGlobalStoreDisplayed(){
         return driver.findElement(By.xpath(globalStoreCategory)).isDisplayed();
     }
 
     // 3
-    public boolean isAvgCustomerReview(){
+    public boolean isAvgCustomerReviewDisplayed(){
         return driver.findElement(By.xpath(avgCustomerReviewCategory)).isDisplayed();
     }
 
     // 4
-    public boolean isSecondLineLink(){
+    public boolean isSecondLineLinkDisplayed(){
         return driver.findElement(By.xpath(secondLineLink)).isDisplayed();
     }
 
     // 5
-    public boolean checkTitleAfterReload(){
+    public boolean isTitleSameAfterReload(){
         return getInitialSecondLineLinkTitle().equals(getReloadSecondLineLinkTitle());
     }
 
