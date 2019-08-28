@@ -34,7 +34,6 @@ public class ElectronicsPhotoPage extends HomePage {
 
     // 1
     public boolean isLoaded(){
-        selectElectronicsCategory();
         return driver.findElement(By.xpath(pageTitle)).isDisplayed();
     }
 
@@ -59,10 +58,9 @@ public class ElectronicsPhotoPage extends HomePage {
     }
 
     // 6
-    public void checkPrimeLables(){
+    public void checkPrimeLabels(){
         checkPrimeCheckbox();
-        List<WebElement> elements = driver.findElements(By.xpath(listOfElements));
-        for (WebElement el : elements) {
+        for (WebElement el : getListings()) {
             el.findElement(By.xpath(labelsInDescription));
         }
     }
@@ -71,10 +69,13 @@ public class ElectronicsPhotoPage extends HomePage {
     helper functions
      */
 
+    private List<WebElement> getListings(){
+        return driver.findElements(By.xpath(listOfElements));
+    }
+
     private void checkPrimeCheckbox(){
         driver.findElement(By.xpath(primeCheckbox)).click();
     }
-
 
     // gets the title of the initial page
     private String getInitialSecondLineLinkTitle(){

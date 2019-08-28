@@ -65,9 +65,9 @@ public class AntoniaTests extends BaseTest {
     }
 
     @Test(groups = "regression")
-    public void isPrimeLabel() throws Exception {
+    public void primeLabelsTest() throws Exception {
         setUp();
-        electronicsPhotoPage.checkPrimeLables();
+        electronicsPhotoPage.checkPrimeLabels();
     }
 
 
