@@ -4,10 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import java.util.List;
 
 public class ElectronicsPhotoPage extends HomePage {
@@ -22,6 +18,9 @@ public class ElectronicsPhotoPage extends HomePage {
     protected String globalStoreCategory = "//h4[text()='Global Store']";
     protected String avgCustomerReviewCategory = "//h4[text()='Avg. Customer Review']";
     protected String secondLineLink = "//*[@class='nav-a-content' and contains(text(),'Electronics')]";
+    protected String primeCheckbox = "//*[@class='a-icon a-icon-prime a-icon-small s-ref-text-link']";
+    protected String listOfElements = "//*[@class='s-result-list s-search-results sg-row']/div";
+    protected String labelsInDescription = "//*[@aria-label='Amazon Prime' or text()='FREE Delivery by Amazon']";
 
 
     public ElectronicsPhotoPage(RemoteWebDriver driver) {
@@ -60,10 +59,21 @@ public class ElectronicsPhotoPage extends HomePage {
     }
 
     // 6
+    public void checkPrimeLables(){
+        checkPrimeCheckbox();
+        List<WebElement> elements = driver.findElements(By.xpath(listOfElements));
+        for (WebElement el : elements) {
+            el.findElement(By.xpath(labelsInDescription));
+        }
+    }
 
     /*
     helper functions
      */
+
+    private void checkPrimeCheckbox(){
+        driver.findElement(By.xpath(primeCheckbox)).click();
+    }
 
 
     // gets the title of the initial page

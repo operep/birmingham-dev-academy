@@ -64,6 +64,12 @@ public class AntoniaTests extends BaseTest {
         assertThat(electronicsPhotoPage.checkTitleAfterReload(), is(true));
     }
 
+    @Test(groups = "regression")
+    public void isPrimeLabel() throws Exception {
+        setUp();
+        electronicsPhotoPage.checkPrimeLables();
+    }
+
 
 
 
