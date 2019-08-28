@@ -8,7 +8,6 @@ public class HomePage extends Page {
 
     protected RemoteWebDriver driver;
     private static String HOME_PAGE_TITLE = "Amazon";
-
     protected String searchBoxLocator = "//input[@id='twotabsearchtextbox']";
     protected String submitButtonLocator = "//input[@type='submit']";
 
