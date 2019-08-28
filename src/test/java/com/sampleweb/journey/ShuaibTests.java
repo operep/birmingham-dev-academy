@@ -55,8 +55,14 @@ public class ShuaibTests extends BaseTest {
     }
 
     @Test (groups = "regression")
-    public void checkGlobalStoreMethodTest() {
+    public void checkGlobalStoreExists() {
         assertThat(gardenAndOutdoorsPage.isGlobalStore(), is(true));
+        delayDriver();
+    }
+
+    @Test (groups = "regression")
+    public void checkAverageCustomerReviewsExist() {
+        assertThat(gardenAndOutdoorsPage.isAverageReviewDisplayed(), is(true));
         delayDriver();
     }
 
