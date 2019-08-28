@@ -4,8 +4,11 @@ import com.sampleweb.BaseTest;
 import com.sampleweb.framework.PageNavigator;
 import com.sampleweb.pages.HealthPage;
 import com.sampleweb.pages.HomePage;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -16,11 +19,11 @@ public class HealthPageTests extends BaseTest {
 
     @BeforeMethod
     public void setUp() throws Exception {
-        healthPage = navigator.navigateToPage(driver, HealthPage.PATH, HealthPage.class);
+        healthPage = new HealthPage(driver);
     }
 
     @Test(groups = "regression")
-    public void healthNavigationPageTest() {
+    public void healthNavigationPageTest() throws Exception {
         assertThat(healthPage.isLoaded(), is(true));
     }
 
@@ -29,5 +32,8 @@ public class HealthPageTests extends BaseTest {
         assertThat(healthPage.verifyTitle(), is(true));
     }
 
-
+    @Test(groups = "regression")
+    public void healthValidateGlobalStore() throws Exception {
+        assertThat(healthPage.verifyGlobalStore(), is(true));
+    }
 }
