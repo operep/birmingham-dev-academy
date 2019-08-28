@@ -33,7 +33,7 @@ public class GardenAndOutdoors extends HomePage {
     }
 
     public boolean isTitleCorrect() throws Exception {
-        return verifyTitle(driver.findElement(By.xpath(tabHeader)).getText(), title);
+        return verifyTitle(driver.findElement(By.xpath(pageTitle)).getText(), title);
     }
 
     public boolean isGlobalStore() {
@@ -50,5 +50,9 @@ public class GardenAndOutdoors extends HomePage {
         } else {
             return true;
         }
+    }
+
+    public boolean isTitleAndMenuLinkEqual() throws Exception {
+        return verifyTitle(driver.findElement(By.xpath(pageTitle)).getText(), driver.findElement(By.xpath(tabHeader)).getText());
     }
 }

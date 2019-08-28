@@ -66,6 +66,12 @@ public class ShuaibTests extends BaseTest {
         delayDriver();
     }
 
+    @Test (groups = "regression")
+    public void checkTitleAndLinkHeaderCorrectTest() throws Exception {
+        assertThat(gardenAndOutdoorsPage.isTitleAndMenuLinkEqual(), is(true));
+        delayDriver();
+    }
+
     /*@Test (groups = "regression")
     public void searchTest() {
         gardenAndOutdoorsPage.setSearchCriteria("Audi lights").clickSubmitButton();
