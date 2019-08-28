@@ -90,11 +90,6 @@ public class ShuaibTests extends BaseTest {
         delayDriver();
     }
 
-    /*@Test (groups = "regression")
-    public void searchTest() {
-        gardenAndOutdoorsPage.setSearchCriteria("Audi lights").clickSubmitButton();
-    }*/
-
     private void delayDriver() {
         synchronized (driver) {
             try {
