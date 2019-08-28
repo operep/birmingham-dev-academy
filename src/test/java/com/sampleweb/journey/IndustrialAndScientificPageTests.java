@@ -45,4 +45,9 @@ public class MyTests extends BaseTest {
         assertThat(inSciPage.redirectedToSamePage(), is(true));
     }
 
+    @Test (groups = "regression")
+    public void verifyPrimeLabelTest() {
+        assertThat(inSciPage.verifyPrimeLabel(), is(true));
+    }
+
 }

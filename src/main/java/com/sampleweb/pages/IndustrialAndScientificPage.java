@@ -20,7 +20,7 @@ public class IndustrialAndScientificPage extends HomePage {
         driver.findElementByXPath("//*[@class=\"nav-search-submit nav-sprite\"]/input").click();
     }
 
-    public boolean isLoaded() {
+    public boolean isTitleDisplayed() {
         return driver.findElement(By.xpath(pageTitle)).isDisplayed();
     }
 
@@ -41,6 +41,13 @@ public class IndustrialAndScientificPage extends HomePage {
     public boolean redirectedToSamePage() {
         driver.findElement(By.xpath("//*[@id=\"nav-subnav\"]/a[@class=\"nav-a nav-b\"]/span")).click();
         return driver.findElement(By.xpath(pageTitle)).isDisplayed();
+    }
+
+    public boolean verifyPrimeLabel() {
+        driver.findElement(By.xpath("//*[@id=\"leftNav\"]/ul[4]/div/li[1]/span/span/div/label/span/i")).click();
+        String amazonPrime =  "//*[@aria-label=\"Amazon Prime\"]";
+        //return driver.findElements(By.xpath("//*[@class=\"s-result-list s-search-results sg-row\"]//*[@class=\"s-include-content-margin s-border-bottom\"]")).iterator().next().findElement(By.xpath(amazonPrime)).isDisplayed();
+        return false;
     }
 
     public IndustrialAndScientificPage setSearchCriteria(String searchText) {
