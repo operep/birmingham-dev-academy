@@ -25,7 +25,7 @@ public class GiftCardsPageTests extends BaseTest {
 
     @Test(groups="regression")
     public void giftCardsNavigationPageTest(){
-        assertThat(giftCardsPage.isLoaded(), is(true));
+        assertThat(giftCardsPage.isPageLoaded(), is(true));
     }
 
     @Test(groups="regression")
@@ -48,9 +48,9 @@ public class GiftCardsPageTests extends BaseTest {
         assertThat(giftCardsPage.verifyGiftCardMenuButtonRedirection(), is(true));
     }
 
-//    @Test(groups="regression")
-//    public void giftCardsPrimeLabelDescription(){
-//        assertThat(giftCardsPage.verifyPrimeCheckboxResultsList(), is(true));
-//    }
+    @Test(groups="regression")
+    public void giftCardsPrimeLabelDescription(){
+        assertThat(giftCardsPage.verifyPrimeCheckboxResultsList(), is(true));
+    }
 
 }
