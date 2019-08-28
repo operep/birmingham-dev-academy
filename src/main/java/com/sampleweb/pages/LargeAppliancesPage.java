@@ -6,19 +6,21 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class LargeAppliancesPage extends HomePage {
 
 
-    public String title = "Large Appliances";
+    private String title = "Large Appliances";
 
-    public String pageTitleLocator = "//b[text()=\"Large Appliances\"]";
-    public String globalStoreBoxLocator = "//input[@name=\"s-ref-checkbox-11259240031\"]";
-    public String largeAppliancesDropDownLocator="//select[@name=\'url\']//option[@value=\'search-alias=appliances\']";
-    public String globalStoreLabelLocator = "//img[@class=\"s-ref-img-sprite\"]";
-    public String subMenuLinkLocator = "//*[@id=\"nav-subnav\"]/a[1]/span";
-    public String primeCheckBoxLocator = "//input[@name=\"s-ref-checkbox-419158031\"]";
+    private String pageTitleLocator = "//b[text()=\"Large Appliances\"]";
+    private String globalStoreBoxLocator = "//input[@name=\"s-ref-checkbox-11259240031\"]";
+    private String largeAppliancesDropDownLocator="//select[@name=\'url\']//option[@value=\'search-alias=appliances\']";
+    private String globalStoreLabelLocator = "//img[@class=\"s-ref-img-sprite\"]";
+    private String subMenuLinkLocator = "//*[@id=\"nav-subnav\"]/a[1]/span";
+    private String primeCheckBoxLocator = "//input[@name=\"s-ref-checkbox-419158031\"]";
+    private String CustomerReviewLocator = "//*[@id=\"leftNav\"]/h4[6]";
 
-    protected String CustomerReviewLocator = "//*[@id=\"leftNav\"]/h4[6]";
+    //Credit to alex
+    private String primeProductListLocator = "//*[@class=\"s-result-list s-search-results sg-row\"]//*[@class=\"s-include-content-margin s-border-bottom\"]";
+    private String primeLabelOrMoreLocator = "//*[@aria-label=\'Amazon Prime\' or @class=\'a-size-base a-color-secondary\']";
 
-    public static String HOME_PATH="https://www.amazon.co.uk";
-    public static String LARGE_APPLIANCES_PATH="https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dappliances&field-keywords=";
+    public static String PATH ="https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dappliances&field-keywords=";
 
     public LargeAppliancesPage(RemoteWebDriver driver) {
         super(driver);
@@ -74,22 +76,8 @@ public class LargeAppliancesPage extends HomePage {
     }
 
     public boolean isPrimeCorrect(){
-        boolean isPrime;
-        boolean isMore;
-
         driver.findElement(By.xpath(primeCheckBoxLocator)).click();
-
-        for(int i = 0; i < 24; i++){
-            isPrime =  driver.findElement(By.xpath("//div[@class=\"s-result-list s-search-results sg-row\"]//div[@data-index=\'" + i + "\']//i[@class=\"a-icon a-icon-prime a-icon-medium\"]")).isDisplayed();
-            if(!isPrime){
-                isMore = driver.findElement(By.xpath("//div[@class=\"s-result-list s-search-results sg-row\"]//div[@data-index=\'"+ i +"\']//span[@class=\"a-size-base a-color-secondary\"]")).isDisplayed();
-                if(!isMore){
-                    return false;
-                }
-            }
-        }
-        return true;
-
+        return driver.findElements(By.xpath(primeProductListLocator)).iterator().next().findElement(By.xpath(primeLabelOrMoreLocator)).isDisplayed();
     }
 
 }
