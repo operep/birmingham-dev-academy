@@ -25,7 +25,7 @@ public class KikoTests extends BaseTest {
     @Test(groups = "regression")
     public void babyPageTitleTest() throws Exception {
         HomePage page = navigator.navigateToPage(driver, HomePage.PATH, HomePage.class);
-        assertThat(page.navigateToBabyPage(), is(true));
+        assertThat(page.navigateToBabyPageViaDropDown(), is(true));
     }
     @Test (groups = "regression")
     public void babyPageGlobalStoreTest() throws Exception {

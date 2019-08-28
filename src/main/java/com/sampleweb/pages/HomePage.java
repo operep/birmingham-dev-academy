@@ -21,11 +21,12 @@ public class HomePage extends Page {
     public WebElement getSearchField() {
         return driver.findElement(By.xpath(searchBoxLocator));
     }
+
     public WebElement getDropDown() {
         return driver.findElement(By.xpath(getDropDown));
     }
 
-    public boolean navigateToBabyPage() {
+    public boolean navigateToBabyPageViaDropDown() {
         getDropDown().findElement(By.xpath("//option[text()='Baby']")).click();
         clickSubmitButton();
         return driver.getCurrentUrl().equals(BabyPage.PATH);
