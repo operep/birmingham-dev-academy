@@ -46,5 +46,22 @@ public class HealthPage extends HomePage{
         return false;
     }
 
+    public boolean verifyAverageReviews() throws Exception {
+        navigateToPage();
+        if(driver.findElementByXPath("//*[@id=\"leftNav\"]/h4[8]").getText().contains("Avg. Customer Review")){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean verifyFirstLinkHasCatagoryName() throws Exception {
+        navigateToPage();
+        if(driver.findElementByXPath("//*[@id=\"nav-subnav\"]/a[1]/span").getText().contains(title)){
+            return true;
+        }
+
+        return false;
+    }
+
 
     }
