@@ -25,11 +25,6 @@ public class DanielTests extends BaseTest {
     }
 
     @Test (groups = "regression")
-    public void computersAndAccessoriesPageUrlNavigationPageTest() {
-        assertThat(computersAndAccessoriesPage.isLoaded(), is(true));
-    }
-
-    @Test (groups = "regression")
     public void searchTest() {
         computersAndAccessoriesPage.setSearchCriteria("Keyboard").clickSubmitButton();
     }
@@ -50,7 +45,7 @@ public class DanielTests extends BaseTest {
 
     @Test (groups = "regression")
     public void checkIfMenuTitleEqualsPageTitleTest() {
-        assertThat( computersAndAccessoriesPage.getDropDownMenuText(), is (computersAndAccessoriesPage.getTitle()));
+        assertThat( computersAndAccessoriesPage.getDropDownMenuText(), is (true));
     }
 
     @Test (groups = "regression")
