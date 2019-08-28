@@ -24,31 +24,31 @@ public class HealthPageTests extends BaseTest {
 
     @Test(groups = "regression")
     public void healthNavigationPageTest() throws Exception {
-        assertThat(healthPage.isLoaded(), is(true));
+        assertThat(healthPage.isHealthPageLoaded(), is(true));
     }
 
     @Test(groups = "regression")
     public void healthPageValidTitleTest() throws Exception {
-        assertThat(healthPage.verifyTitle(), is(true));
+        assertThat(healthPage.verifyHealthTitleExists(), is(true));
     }
 
     @Test(groups = "regression")
-    public void healthValidateGlobalStoreTest() throws Exception {
-        assertThat(healthPage.verifyGlobalStore(), is(true));
+    public void healthValidateGlobalStoreExistsTest() throws Exception {
+        assertThat(healthPage.verifyGlobalStoreExists(), is(true));
     }
 
     @Test(groups = "regression")
-    public void healthAverageCustomerReviewDisplayTest() throws Exception {
-        assertThat(healthPage.verifyAverageReviews(), is(true));
+    public void healthValidateCustomerReviewsExistTest() throws Exception {
+        assertThat(healthPage.verifyAverageReviewsExist(), is(true));
     }
 
     @Test(groups = "regression")
-    public void naveBarTitleDisplayTest() throws Exception{
+    public void healthValidateNavigationRedirectsCorrectlyTest() throws Exception{
         assertThat(healthPage.verifyFirstLinkHasCatagoryName(), is(true));
     }
 
     @Test(groups = "regression")
-    public void ensureAllPrimeItemsHealthTest() throws Exception{
-        assertThat(healthPage.selectPrimeReturnsOnlyPrimeHealth(), is (true));
+    public void ensureAllPrimeItemsLabelledTest() throws Exception{
+        assertThat(healthPage.verifySelectPrimeReturnsOnlyPrimeitems(), is (true));
     }
 }
