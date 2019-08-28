@@ -3,6 +3,7 @@ package com.sampleweb.journey;
 import com.sampleweb.BaseTest;
 import com.sampleweb.framework.PageNavigator;
 import com.sampleweb.pages.ChildrensBooksPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -12,7 +13,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class OlekTests extends BaseTest {
+public class RewazTests extends BaseTest {
 
     private PageNavigator navigator = new PageNavigator();
     private ChildrensBooksPage childrensBooksPage;
@@ -22,21 +23,21 @@ public class OlekTests extends BaseTest {
         childrensBooksPage = navigator.navigateToPage(driver, ChildrensBooksPage.PATH, ChildrensBooksPage.class);
     }
 
-//    @Test (groups = "regression")
-//    public void babyProductsNavigationPageTest() {
-//        assertThat(childrensBooksPage.isLoaded(), is(true));
-//    }
-//
-//    @Test (groups = "regression")
-//    public void babyProductsUrlNavigationPageTest() {
-//        assertThat(childrensBooksPage.isLoaded(), is(true));
-//    }
-//
-//
-//    @Test (groups = "regression")
-//    public void test() throws Exception {
-//        assertThat(childrensBooksPage.isTitleCorrect(), is(true));
-//    }
+    @Test (groups = "regression")
+    public void babyProductsNavigationPageTest() {
+        assertThat(childrensBooksPage.isLoaded(), is(true));
+    }
+
+    @Test (groups = "regression")
+    public void babyProductsUrlNavigationPageTest() {
+        assertThat(childrensBooksPage.isLoaded(), is(true));
+    }
+
+
+    @Test (groups = "regression")
+    public void test() throws Exception {
+        assertThat(childrensBooksPage.isTitleCorrect(), is(true));
+    }
 
     @Test (groups = "regression")
     public void titleNavigationTest() throws Exception {
@@ -96,6 +97,25 @@ public class OlekTests extends BaseTest {
         WebElement pageTitle = driver.findElementByXPath("//img[@alt=\"Luxury Beauty\"]");
 
         if(!pageTitle.getAttribute("alt").equals(childrensBooksPage.getTitle()))
+        {
+            Assert.fail();
+        }
+    }
+
+    @Test (groups = "regression")
+    public void checkIfOnlyContainsPrime() throws Exception {
+
+
+        String primeBox = "//input[@name=\"s-ref-checkbox-419158031\"]\n";
+        String xpathPrime = "//span[@class=\"aok-inline-block s-image-logo-view\"]";
+        String xpathMore = "//span[@class=\"a-size-base a-color-secondary\"]";
+        String xpathAllResults = "//*[@class='s-result-list s-search-results sg-row']";
+
+        driver.findElementByXPath(primeBox).click();
+
+        boolean result = driver.findElementsByXPath(xpathAllResults).iterator().next().findElement(By.xpath(xpathPrime)).isDisplayed();
+
+        if(!result)
         {
             Assert.fail();
         }
