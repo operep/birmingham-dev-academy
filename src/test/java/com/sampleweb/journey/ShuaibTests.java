@@ -72,6 +72,12 @@ public class ShuaibTests extends BaseTest {
         delayDriver();
     }
 
+    @Test (groups = "regression")
+    public void openNewLinkTest() {
+        assertThat(gardenAndOutdoorsPage.openNewLinkInNewTabAndCheckIfCorrect(), is(true));
+        delayDriver();
+    }
+
     /*@Test (groups = "regression")
     public void searchTest() {
         gardenAndOutdoorsPage.setSearchCriteria("Audi lights").clickSubmitButton();
