@@ -20,10 +20,9 @@ public class DragosTests extends BaseTest {
 
     @BeforeMethod
     public void setUp() throws Exception {
-        BooksPage = navigator.navigateToPage(driver, "https://www.amazon.co.uk/", BooksPage.class);
+        BooksPage = navigator.navigateToPage(driver, com.sampleweb.pages.BooksPage.PATH, BooksPage.class);
         BooksPage.selectBooks();
     }
-
 
     @Test (groups = "regression")
     public void checkTitleMatchTest() {
@@ -54,22 +53,4 @@ public class DragosTests extends BaseTest {
     public void checkPrimeBoxTest() {
         assertThat(BooksPage.isPrimeBoxEverywhere(), is(true));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
