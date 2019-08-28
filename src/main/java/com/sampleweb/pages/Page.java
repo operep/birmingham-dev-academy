@@ -58,4 +58,5 @@ public abstract class Page {
                 + String.format("\n Expected: %s page, \n Found: %s page", expected, actual)
         );
     }
+
 }
