@@ -38,13 +38,13 @@ public class ShuaibTests extends BaseTest {
 
     @Test (groups = "regression")
     public void setDepartmentDropdownTest() {
-        gardenAndOutdoorsPage.setDepartmentDropdown(gardenAndOutdoorsPage.title);
+        gardenAndOutdoorsPage.setDepartmentDropdown(GardenAndOutdoors.TITLE);
         delayDriver();
     }
 
     @Test (groups = "regression")
     public void navigateToThisPage() {
-        gardenAndOutdoorsPage.navigateHere();
+        gardenAndOutdoorsPage.navigateToGardenAndOutdoorsPage();
         delayDriver();
     }
 
@@ -62,7 +62,7 @@ public class ShuaibTests extends BaseTest {
 
     @Test (groups = "regression")
     public void checkAverageCustomerReviewsExist() {
-        assertThat(gardenAndOutdoorsPage.isAverageReviewDisplayed(), is(true));
+        assertThat(gardenAndOutdoorsPage.isAverageCustomerReviewDisplayed(), is(true));
         delayDriver();
     }
 
@@ -80,7 +80,7 @@ public class ShuaibTests extends BaseTest {
 
     @Test (groups = "regression")
     public void primeCheckboxTest() {
-        gardenAndOutdoorsPage.checkPrimeCheckbox();
+        gardenAndOutdoorsPage.makePrimeCheckboxChecked();
         delayDriver();
     }
 

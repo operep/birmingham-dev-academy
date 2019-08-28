@@ -31,8 +31,7 @@ public class HomePage extends Page {
     }
 
     public void setDepartmentDropdown(String option) {
-        Select dropdown = new Select(getDepartmentDropdownBox());
-        dropdown.selectByVisibleText(option);
+        new Select(getDepartmentDropdownBox()).selectByVisibleText(option);
     }
 
     public void clickSubmitButton() {
