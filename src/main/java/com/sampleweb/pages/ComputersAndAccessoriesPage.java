@@ -8,15 +8,15 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ComputersAndAccessoriesPage extends HomePage {
     public String title = "Computers & Accessories";
-    private String pageTitle = "//*[@id='fst-hybrid-dynamic-h1']/div/h1/b";
-    private String globalStore = "//*[@id='leftNav']/ul[3]/div/li/span/span/div/label/span/span/img";
-    private String averageReviewsText = "//*[@id='leftNav']/h4[9]";
-    private String menuText = "//*[@id='nav-subnav']/a[1]";
-    private String dropDownMenu = "//*[@id='searchDropdownBox']";
+    private final String pageTitle = "//*[@id='fst-hybrid-dynamic-h1']/div/h1/b";
+    private final String globalStore = "//*[@id='leftNav']/ul[3]/div/li/span/span/div/label/span/span/img";
+    private final String averageReviewsText = "//*[@id='leftNav']/h4[9]";
+    private final String menuText = "//*[@id='nav-subnav']/a[1]";
+    private final String dropDownMenu = "//*[@id='searchDropdownBox']";
     public static String PATH = "https://www.amazon.co.uk/s?i=computers&ref=nb_sb_noss";
-    private String products = "//*[@class='s-result-list s-search-results sg-row']//*[@class='s-include-content-margin s-border-bottom']";
-    private String amazonPrimeCheckbox = "//*[@id='leftNav']/ul[5]/div/li[1]/span/span/div/label/input";
-    private String amazonPrimeLabel = "//*[@aria-label='Amazon Prime' or @class='a-size-base a-color-secondary']";
+    private final String products = "//*[@class='s-result-list s-search-results sg-row']//*[@class='s-include-content-margin s-border-bottom']";
+    private final String amazonPrimeCheckbox = "//*[@id='leftNav']/ul[5]/div/li[1]/span/span/div/label/input";
+    private final String amazonPrimeLabel = "//*[@aria-label='Amazon Prime' or @class='a-size-base a-color-secondary']";
 
     public ComputersAndAccessoriesPage(RemoteWebDriver driver){
         super(driver);
