@@ -54,6 +54,12 @@ public class ShuaibTests extends BaseTest {
         delayDriver();
     }
 
+    @Test (groups = "regression")
+    public void checkGlobalStoreMethodTest() {
+        assertThat(gardenAndOutdoorsPage.isGlobalStore(), is(true));
+        delayDriver();
+    }
+
     /*@Test (groups = "regression")
     public void searchTest() {
         gardenAndOutdoorsPage.setSearchCriteria("Audi lights").clickSubmitButton();

@@ -10,6 +10,7 @@ public class GardenAndOutdoors extends HomePage {
     public String title = "Garden & Outdoors";
     public String pageTitle = "//h1[text()=\"Garden & Outdoors\"]";
     public String tabHeader = "//span[@class='nav-a-content'][contains(text(),'Garden & Outdoors')]";
+    public String globalStore = "//img[@class='s-ref-img-sprite']";
     public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Doutdoor&field-keywords=";
 
     public GardenAndOutdoors(RemoteWebDriver driver) {
@@ -32,5 +33,13 @@ public class GardenAndOutdoors extends HomePage {
 
     public boolean isTitleCorrect() throws Exception {
         return verifyTitle(driver.findElement(By.xpath(tabHeader)).getText(), title);
+    }
+
+    public boolean isGlobalStore() {
+        if (driver.findElement(By.xpath(globalStore)) == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
