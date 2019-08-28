@@ -5,15 +5,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import org.openqa.selenium.support.ui.Select;
+
 public class HomePage extends Page {
 
     protected RemoteWebDriver driver;
-
-    protected String departmentDropDownLocator = "//select[@id='searchDropdownBox']";
     protected String searchBoxLocator = "//input[@id='twotabsearchtextbox']";
 
     @FindBy(xpath = "//input[@type='submit']")
     protected WebElement submitButtonLocator;
+
+    protected String departmentDropDownLocator = "//select[@id='searchDropdownBox']";
 
     public HomePage(RemoteWebDriver driver) {
         super(driver);
@@ -26,6 +28,11 @@ public class HomePage extends Page {
 
     public WebElement getSearchField() {
         return driver.findElement(By.xpath(searchBoxLocator));
+    }
+
+    public void setDepartmentDropdown(String option) {
+        Select dropdown = new Select(getDepartmentDropdownBox());
+        dropdown.selectByVisibleText(option);
     }
 
     public void clickSubmitButton() {
