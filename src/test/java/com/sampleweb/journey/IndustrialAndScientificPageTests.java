@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class MyTests extends BaseTest {
+public class IndustrialAndScientificPageTests extends BaseTest {
 
     private PageNavigator navigator = new PageNavigator();
     private IndustrialAndScientificPage inSciPage;
@@ -17,12 +17,14 @@ public class MyTests extends BaseTest {
     @BeforeMethod
     public void setUp() throws Exception {
         inSciPage = navigator.navigateToPage(driver, IndustrialAndScientificPage.getPATH(), IndustrialAndScientificPage.class);
-        inSciPage.navigateToInSciPage();
     }
 
     @Test (groups = "regression")
-    public void hasCorrectTitle() {
-        assertThat(inSciPage.isLoaded(), is(true));
+    public void hasCorrectTitleTest() throws Exception {
+        IndustrialAndScientificPage inSciPageNavTest;
+        inSciPageNavTest = navigator.navigateToPage(driver, IndustrialAndScientificPage.getOriginalPATH(), IndustrialAndScientificPage.class);
+        inSciPageNavTest.navigateToInSciPage();
+        assertThat(inSciPage.hasTitleDisplayed(), is(true));
     }
 
     @Test (groups = "regression")
@@ -41,7 +43,7 @@ public class MyTests extends BaseTest {
     }
 
     @Test (groups = "regression")
-    public void isRedirectedToSamePage() {
+    public void isRedirectedToSamePageTest() {
         assertThat(inSciPage.redirectedToSamePage(), is(true));
     }
 
