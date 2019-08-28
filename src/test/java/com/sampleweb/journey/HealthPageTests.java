@@ -33,7 +33,17 @@ public class HealthPageTests extends BaseTest {
     }
 
     @Test(groups = "regression")
-    public void healthValidateGlobalStore() throws Exception {
+    public void healthValidateGlobalStoreTest() throws Exception {
         assertThat(healthPage.verifyGlobalStore(), is(true));
+    }
+
+    @Test(groups = "regression")
+    public void healthAverageCustomerReviewDisplayTest() throws Exception {
+        assertThat(healthPage.verifyAverageReviews(), is(true));
+    }
+
+    @Test(groups = "regression")
+    public void naveBarTitleDisplayTest() throws Exception{
+        assertThat(healthPage.verifyFirstLinkHasCatagoryName(), is(true));
     }
 }
