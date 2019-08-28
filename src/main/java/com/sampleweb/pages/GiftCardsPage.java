@@ -12,6 +12,7 @@ public class GiftCardsPage extends HomePage {
     private String globalStoreSelectionPath = "//h4[text()='Global Store']";
     private String customerReviewPath = "//h4[text()='Avg. Customer Review']";
     private String primeCheckboxPath = "//*[@name='s-ref-checkbox-419158031']";
+    private String primeSearchResultsPath = "//*[@class='s-result-list s-search-results sg-row']/*";
 
     public GiftCardsPage(RemoteWebDriver driver) {
         super(driver);
@@ -65,7 +66,6 @@ public class GiftCardsPage extends HomePage {
         return checkIfElementExists(globalStoreSelectionPath);
     }
 
-
     /**
      * Verify that average customer review section exists on the page
      * @return true if section exists
@@ -95,9 +95,7 @@ public class GiftCardsPage extends HomePage {
      */
     public boolean verifyPrimeCheckboxResultsList(){
         clickButton(primeCheckboxPath);
-        String searchResultsPath = "//*[@class='s-result-list s-search-results sg-row']/*";
-        String primePath = "//*[@class='s-result-list s-search-results sg-row']//*[@aria-label='Amazon Prime']";
-        return driver.findElements(By.xpath(searchResultsPath)).iterator().next().findElement(By.xpath(primePath)).isDisplayed();
+        return driver.findElements(By.xpath(primeSearchResultsPath)).iterator().next().findElement(By.className("a-icon-prime")).isDisplayed();
     }
 
     /**
