@@ -78,6 +78,18 @@ public class ShuaibTests extends BaseTest {
         delayDriver();
     }
 
+    @Test (groups = "regression")
+    public void primeCheckboxTest() {
+        gardenAndOutdoorsPage.checkPrimeCheckbox();
+        delayDriver();
+    }
+
+    @Test (groups = "regression")
+    public void isItemsPrimeOnlyTest() {
+        assertThat(gardenAndOutdoorsPage.isOnlyPrimeItems(), is(true));
+        delayDriver();
+    }
+
     /*@Test (groups = "regression")
     public void searchTest() {
         gardenAndOutdoorsPage.setSearchCriteria("Audi lights").clickSubmitButton();

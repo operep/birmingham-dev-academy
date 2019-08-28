@@ -17,6 +17,9 @@ public class GardenAndOutdoors extends HomePage {
     public String tabHeaderLink = "//a[@class='nav-a nav-b']";
     public String globalStore = "//img[@class='s-ref-img-sprite']";
     public String avgCustomerReviews = "//h4[contains(text(),'Avg. Customer Review')]";
+    public String primeCheckbox = "//input[@name='s-ref-checkbox-419158031']";
+    public String primeResultsList = "//*[@id=\"search\"]/div[1]/div[2]/div/span[3]/div[1]";
+    public String primeLabelOrMoreBuyingChoices = "//*[@aria-label='Amazon Prime' or @class='a-size-base a-color-secondary']";
     public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Doutdoor&field-keywords=";
 
     public GardenAndOutdoors(RemoteWebDriver driver) {
@@ -83,5 +86,15 @@ public class GardenAndOutdoors extends HomePage {
 
     public boolean isTitleAndMenuLinkEqual() throws Exception {
         return verifyTitle(driver.findElement(By.xpath(pageTitle)).getText(), driver.findElement(By.xpath(tabHeader)).getText());
+    }
+
+    public void checkPrimeCheckbox() {
+        driver.findElement(By.xpath(primeCheckbox)).click();
+    }
+
+    public boolean isOnlyPrimeItems() {
+        checkPrimeCheckbox();
+
+        return driver.findElements(By.xpath(primeResultsList)).iterator().next().findElement(By.xpath(primeLabelOrMoreBuyingChoices)).isDisplayed();
     }
 }
