@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class DVDTests extends BaseTest {
@@ -26,7 +27,7 @@ public class DVDTests extends BaseTest {
 
     @Test(groups = "regression")
     public void dvdProductsTitleCorrect() {
-        assertThat(dvdPage.getTitleText(), is(DVDPage.TITLE));
+        assertEquals(dvdPage.getTitleText(), DVDPage.TITLE);
     }
 
     @Test(groups = "regression")
@@ -41,13 +42,13 @@ public class DVDTests extends BaseTest {
 
     @Test(groups = "regression")
     public void dvdProductsPageLinkTextEqualsCategory() {
-        assertThat(dvdPage.getPageLinkText(), is(DVDPage.TITLE));
+        assertEquals(dvdPage.getPageLinkText(), DVDPage.TITLE);
     }
 
     @Test(groups = "regression")
     public void dvdProductsPageLinkNavigatesToSamePage() {
         dvdPage.clickPageLink();
-        assertThat(dvdPage.getTitleText(), is(DVDPage.TITLE));
+        assertEquals(dvdPage.getTitleText(), DVDPage.TITLE);
     }
 
     @Test(groups = "regression")
