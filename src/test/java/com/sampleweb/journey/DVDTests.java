@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertTrue;
 
 public class DVDTests extends BaseTest {
 
@@ -30,12 +31,12 @@ public class DVDTests extends BaseTest {
 
     @Test(groups = "regression")
     public void dvdProductsGlobalStoreExists() {
-        assertThat(dvdPage.hasGlobalStore(), is(true));
+        assertTrue(dvdPage.hasGlobalStore());
     }
 
     @Test(groups = "regression")
     public void dvdProductsAvgReviewExists() {
-        assertThat(dvdPage.hasAvgReview(), is(true));
+        assertTrue(dvdPage.hasAvgReview());
     }
 
     @Test(groups = "regression")
