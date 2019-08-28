@@ -46,4 +46,9 @@ public class HealthPageTests extends BaseTest {
     public void naveBarTitleDisplayTest() throws Exception{
         assertThat(healthPage.verifyFirstLinkHasCatagoryName(), is(true));
     }
+
+    @Test(groups = "regression")
+    public void ensureAllPrimeItemsHealthTest() throws Exception{
+        assertThat(healthPage.selectPrimeReturnsOnlyPrimeHealth(), is (true));
+    }
 }

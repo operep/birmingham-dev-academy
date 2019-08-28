@@ -63,5 +63,21 @@ public class HealthPage extends HomePage{
         return false;
     }
 
+    public boolean verifyClickOnHeaderMenuDirectsToSamePage() throws Exception {
+        navigateToPage();
+        driver.findElementByXPath("//*[@id=\"nav-subnav\"]/a[1]/span").click();
+        if(driver.getCurrentUrl().contentEquals(PATH)){
+            return true;
+        }
+        return false;
+    }
 
+    public boolean selectPrimeReturnsOnlyPrimeHealth() throws Exception {
+        navigateToPage();
+        driver.findElementByXPath("//*[@id=\"leftNav\"]/ul[6]/div/li[1]/span/span/div/label/input").click();
+        if(driver.findElementsByClassName("a-section aok-relative s-image-fixed-height").contains(driver.findElementByClassName("a-icon a-icon-prime a-icon-medium"))){
+            return true;
+        }
+            return false;
+    }
     }
