@@ -8,10 +8,24 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends Page {
 
     protected RemoteWebDriver driver;
-    protected String searchBoxLocator = "//input[@id='twotabsearchtextbox']";
+    @FindBy(xpath = "//input[@id='twotabsearchtextbox']")
+    protected WebElement searchBox;
 
     @FindBy(xpath = "//input[@type='submit']")
-    protected WebElement submitButtonLocator;
+    protected WebElement submitButton;
+
+    private static String HOME_PAGE_TITLE = "Amazon";
+    public static String PATH = "https://www.amazon.co.uk/";
+
+    @FindBy(xpath = "//select[@id='searchDropdownBox']/option[@value='search-alias=classical']")
+    protected WebElement categorySelector;
+
+    @FindBy(xpath = "//h1")
+    protected WebElement pageTitle;
+
+    public String getTitle() {
+        return pageTitle.getText();
+    }
 
     public HomePage(RemoteWebDriver driver) {
         super(driver);
@@ -19,10 +33,15 @@ public class HomePage extends Page {
     }
 
     public WebElement getSearchField() {
-        return driver.findElement(By.xpath(searchBoxLocator));
+        return searchBox;
     }
 
     public void clickSubmitButton() {
-        submitButtonLocator.click();
+        submitButton.click();
+    }
+
+    public HomePage setSearchCategoryClassical() {
+        categorySelector.click();
+        return this;
     }
 }
