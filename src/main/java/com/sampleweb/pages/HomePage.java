@@ -9,7 +9,6 @@ public class HomePage extends Page {
     public static final String PATH = "https://www.amazon.co.uk/ref=nav_logo";
     protected RemoteWebDriver driver;
     private static String HOME_PAGE_TITLE = "Amazon";
-
     protected String searchBoxLocator = "//input[@id='twotabsearchtextbox']";
     protected String submitButtonLocator = "//input[@type='submit']";
     protected String getDropDown = "//select[@id='searchDropdownBox']";
