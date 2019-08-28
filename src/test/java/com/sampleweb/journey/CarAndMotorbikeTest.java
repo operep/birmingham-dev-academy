@@ -11,16 +11,15 @@ import static org.hamcrest.core.Is.is;
 
 // A wild lenny appears ( ͡° ͜ʖ ͡°)
 
-public class SifatTests extends BaseTest {
+public class CarAndMotorbikeTest extends BaseTest {
 
     private PageNavigator navigator = new PageNavigator();
     private CarAndMotorbikePage carAndMotorbikePage;
 
     @BeforeMethod
     public void setUp() throws Exception {
-        carAndMotorbikePage = navigator.navigateToPage(driver, CarAndMotorbikePage.PATH, CarAndMotorbikePage.class);
+        carAndMotorbikePage = navigator.navigateToPage(driver, "https://www.amazon.co.uk/", CarAndMotorbikePage.class);
         carAndMotorbikePage.selectOptionFromDropdown();
-
     }
 
     @Test (groups = "regression")
@@ -32,11 +31,6 @@ public class SifatTests extends BaseTest {
     public void carUrlNavigationPageTest() {
         assertThat(carAndMotorbikePage.isLoaded(), is(true));
     }
-
-   /* @Test (groups = "regression")
-    public void searchTest() {
-        carAndMotorbikePage.setSearchCriteria(" ... ").clickSubmitButton();
-    }*/
 
     @Test (groups = "regression")
     public void carTitlePageCorrectTest() {
@@ -63,7 +57,6 @@ public class SifatTests extends BaseTest {
     public void checkPrimeLabels() {
         carAndMotorbikePage.selectPrimeCheckbox();
         assertThat(carAndMotorbikePage.checkPrimeLabels(), is(true));
-
     }
 
 }

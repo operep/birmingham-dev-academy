@@ -6,20 +6,17 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 // A wild lenny appears ( ͡° ͜ʖ ͡°)
 public class CarAndMotorbikePage extends HomePage {
 
-    public static String PATH = "https://www.amazon.co.uk/"; // Amazon home page url
+    public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dautomotive&field-keywords=";
     public String title = "Car & Motorbike";
     public String pageTitle = "//h1[text()=\"Car & Motorbike\"]";
-    public String primeLabel = "//*[@aria-label='Amazon Prime']";
-
-    // TODO: Change file paths from absolute to relative
-    public String navTitle = "//*[@id=\"nav-subnav\"]/a[1]/span";
+    public String navTitle = "//span[@class='nav-a-content'][contains(text(), 'Car')]";
     public String dropdownOption = "//*[@id=\"searchDropdownBox\"]/option[11]";
     public String secondLineMenuLink = "//*[@id=\"nav-subnav\"]/a[1]/span";
-    public String globalStoreTitle = "//*[@id=\"leftNav\"]/h4[2]";
-    public String avgCustomerReviewTitle = "//*[@id=\"leftNav\"]/h4[6]";
-
-    public String resultsList = "//*[@id=\"search\"]/div[1]/div[2]/div/span[3]/div[1]";
-    public String primeCheckbox = "//*[@id=\"leftNav\"]/ul[4]/div/li[1]/span/span/div/label/input";
+    public String globalStoreTitle = "//h4[@class='a-size-small a-spacing-mini a-color-base a-text-bold'][contains(text(), 'Global Store')]";
+    public String avgCustomerReviewTitle = "//h4[@class='a-size-small a-spacing-micro a-color-base a-text-bold'][contains(text(), 'Avg. Customer Review')]";
+    public String primeLabel = "//*[@aria-label='Amazon Prime']";
+    public String resultsList = "//div[@class='s-result-list s-search-results sg-row']";
+    public String primeCheckbox = "//input[@name='s-ref-checkbox-419158031']";
 
 
     public CarAndMotorbikePage(RemoteWebDriver driver) {
@@ -32,14 +29,6 @@ public class CarAndMotorbikePage extends HomePage {
      */
     public boolean isLoaded() {
         return driver.findElement(By.xpath(pageTitle)).isDisplayed();
-    }
-
-    /**
-     * @param searchText
-     */
-    public CarAndMotorbikePage setSearchCriteria(String searchText) {
-        getSearchField().sendKeys(searchText);
-        return this;
     }
 
     /**
@@ -63,7 +52,6 @@ public class CarAndMotorbikePage extends HomePage {
     public void selectPrimeCheckbox() {
         driver.findElement(By.xpath(primeCheckbox)).click();
     }
-
 
     /**
      * Checks that the page title is the same as first link text on the second line menu
