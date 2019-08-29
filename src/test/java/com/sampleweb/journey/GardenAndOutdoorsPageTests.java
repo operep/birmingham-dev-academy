@@ -61,6 +61,16 @@ public class GardenAndOutdoorsPageTests extends BaseTest {
 
     @Test (groups = "regression")
     public void isItemsPrimeOnlyTest() {
-        assertThat(gardenAndOutdoorsPage.isOnlyPrimeItems(), is(true));
+        assertThat(gardenAndOutdoorsPage.makePrimeCheckboxChecked().isOnlyPrimeItems(), is(true));
+    }
+
+    @Test(groups = "regression")
+    public void selectHighestReviewLevelTest() {
+        gardenAndOutdoorsPage.selectHighestReviewLevel();
+    }
+
+    @Test(groups = "regression")
+    public void orderByRatingTest() {
+        gardenAndOutdoorsPage.selectHighestReviewLevel().orderByRating();
     }
 }

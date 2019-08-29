@@ -16,7 +16,8 @@ public class HomePage extends Page {
     @FindBy(xpath = "//input[@type='submit']")
     protected WebElement submitButtonLocator;
 
-    protected String departmentDropDownLocator = "//select[@id='searchDropdownBox']";
+    @FindBy(xpath = "//select[@id='searchDropdownBox']")
+    protected WebElement departmentDropDownLocator;
 
     public HomePage(RemoteWebDriver driver) {
         super(driver);
@@ -24,7 +25,7 @@ public class HomePage extends Page {
     }
 
     public WebElement getDepartmentDropdownBox() {
-        return driver.findElement(By.xpath(departmentDropDownLocator));
+        return departmentDropDownLocator;
     }
 
     public WebElement getSearchField() {

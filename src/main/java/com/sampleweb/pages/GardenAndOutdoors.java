@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,12 @@ public class GardenAndOutdoors extends HomePage {
 
     @FindBy(xpath = "//h4[contains(text(),'Avg. Customer Review')]")
     protected WebElement avgCustomerReviews;
+
+    @FindBy(xpath = "//i[contains(@class,'a-icon a-icon-star-medium')]")
+    protected List<WebElement> allCustomerReviews;
+
+    @FindBy(xpath = "//select[@id='s-result-sort-select']")
+    protected WebElement sortByDropdown;
 
     @FindBy(xpath = "//input[@name='s-ref-checkbox-419158031']")
     protected WebElement primeCheckbox;
@@ -51,9 +58,10 @@ public class GardenAndOutdoors extends HomePage {
         return this;
     }
 
-    public void navigateToGardenAndOutdoorsPage() {
+    public GardenAndOutdoors navigateToGardenAndOutdoorsPage() {
         setDepartmentDropdown(TITLE);
         setSearchCriteria("").clickSubmitButton();
+        return this;
     }
 
     public boolean openNewLinkInNewTabAndCheckIfCorrect() throws Exception {
@@ -88,13 +96,12 @@ public class GardenAndOutdoors extends HomePage {
         return verifyTitle(pageTitle.getText(), tabHeader.getText());
     }
 
-    public void makePrimeCheckboxChecked() {
+    public GardenAndOutdoors makePrimeCheckboxChecked() {
         primeCheckbox.click();
+        return this;
     }
 
     public boolean isOnlyPrimeItems() {
-        makePrimeCheckboxChecked();
-
         List<WebElement> products = primeResultsList;
         for (WebElement product: products) {
             if (!(primeLabelOrMoreBuyingChoices.isDisplayed())) {
@@ -106,7 +113,16 @@ public class GardenAndOutdoors extends HomePage {
     }
 
     //TODO - BELOW
-    //Click highest avg customer review rating
-    //order by rating
+    //Click highest avg customer review rating - DONE
+    //order by rating - DONE
     //check orders are in order of rating
+    public GardenAndOutdoors selectHighestReviewLevel() {
+        allCustomerReviews.get(0).click();
+        return this;
+    }
+
+    public GardenAndOutdoors orderByRating() {
+        new Select((sortByDropdown)).selectByVisibleText("Avg. Customer Review");
+        return this;
+    }
 }
