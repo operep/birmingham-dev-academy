@@ -19,7 +19,7 @@ public class ChildrensBooksPage extends HomePage {
     }
 
     public ChildrensBooksPage setSearchCriteria(String searchText) {
-        getSearchField().sendKeys(searchText);
+        twoTabSearchBar.sendKeys(searchText);
         return this;
     }
 }

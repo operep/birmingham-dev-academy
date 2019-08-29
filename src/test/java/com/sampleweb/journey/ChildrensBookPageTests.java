@@ -2,7 +2,9 @@ package com.sampleweb.journey;
 
 import com.sampleweb.BaseTest;
 import com.sampleweb.framework.PageNavigator;
+import com.sampleweb.pages.BabyPage;
 import com.sampleweb.pages.ChildrensBooksPage;
+import com.sampleweb.pages.HomePage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
