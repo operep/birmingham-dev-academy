@@ -159,6 +159,7 @@
                     </properties>
                     <workingDirectory>target/</workingDirectory>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
 
                 <dependencies>
