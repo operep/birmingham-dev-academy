@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class KikoTests extends BaseTest {
+public class BabyPageTests extends BaseTest {
 
     private BabyPage babyPage;
     private PageNavigator navigator = new PageNavigator();
