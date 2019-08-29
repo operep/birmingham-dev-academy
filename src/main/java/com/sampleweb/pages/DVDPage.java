@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -22,6 +23,12 @@ public class DVDPage extends HomePage {
 
     @FindBy(xpath = "//*[@class='s-result-list s-search-results sg-row']/div")
     public List<WebElement> products;
+
+    @FindBy(xpath = "//span[text()='4 Stars & Up']")
+    public WebElement fourStars;
+
+    @FindBy(xpath = "//*[@id=\"s-result-sort-select\"]/option[text()='Avg. Customer Review']")
+    public WebElement sortByReview;
 
     @FindBy(xpath = "//h4[text()='Avg. Customer Review']")
     private WebElement avgReviewHeading;
@@ -44,6 +51,13 @@ public class DVDPage extends HomePage {
         return avgReviewHeading.isDisplayed();
     }
 
+    public List<Float> getReviewScores() {
+        List<Float> list = new ArrayList<>();
+        for (WebElement e : productAvgReviewSpans) {
+            Float aFloat = Float.valueOf(e.getAttribute("innerHTML").split(" ")[0]);
+            list.add(aFloat);
+        }
+        return list;
     }
 
 }

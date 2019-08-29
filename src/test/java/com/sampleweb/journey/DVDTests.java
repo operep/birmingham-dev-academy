@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -57,6 +57,18 @@ public class DVDTests extends BaseTest {
         List<WebElement> products = dvdPage.products;
         for (WebElement product : products) {
             product.findElement(By.xpath(".//span[text()='FREE Delivery by '] | .//i[@aria-label='Amazon Prime']"));
+        }
+    }
+
+    @Test(groups = "regression")
+    public void dvdProductsSortByStars() {
+        dvdPage.fourStars.click();
+        dvdPage.sortByReview.click();
+
+        float previousScore = 5.0f;
+        for (float score : dvdPage.getReviewScores()) {
+            assertThat(score, lessThanOrEqualTo(previousScore));
+            previousScore = score;
         }
     }
 
