@@ -18,16 +18,16 @@ public class DVDPage extends HomePage {
     @FindBy(css = "div#nav-subnav>a:first-child>span")
     public WebElement pageLink;
 
-    @FindBy(xpath = "//*[@id='leftNav']//i[contains(@class, 'a-icon-prime')]")
+    @FindBy(xpath = "//div[@id='leftNav']//i[contains(@class, 'a-icon-prime')]")
     public WebElement primeCheckbox;
 
-    @FindBy(xpath = "//*[@class='s-result-list s-search-results sg-row']/div")
+    @FindBy(xpath = "//div[@class='s-result-list s-search-results sg-row']/div")
     public List<WebElement> products;
 
     @FindBy(xpath = "//span[text()='4 Stars & Up']")
     public WebElement fourStars;
 
-    @FindBy(xpath = "//*[@id=\"s-result-sort-select\"]/option[text()='Avg. Customer Review']")
+    @FindBy(xpath = "//select[@id='s-result-sort-select']/option[text()='Avg. Customer Review']")
     public WebElement sortByReview;
 
     @FindBy(xpath = "//h4[text()='Avg. Customer Review']")
@@ -36,7 +36,7 @@ public class DVDPage extends HomePage {
     @FindBy(xpath = "//h4[text()='Global Store']")
     private WebElement globalStoreHeading;
 
-    @FindBy(xpath = "//*[@class='s-result-list s-search-results sg-row']//span[@class='a-icon-alt']")
+    @FindBy(xpath = "//div[@class='s-result-list s-search-results sg-row']//span[@class='a-icon-alt']")
     private List<WebElement> productAvgReviewSpans;
 
     public DVDPage(RemoteWebDriver driver) {
