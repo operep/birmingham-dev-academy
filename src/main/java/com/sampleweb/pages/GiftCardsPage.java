@@ -11,7 +11,7 @@ public class GiftCardsPage extends HomePage {
     private String dropdownOptionPath = "//*[@id='searchDropdownBox']";
     private String globalStoreSelectionPath = "//h4[text()='Global Store']";
     private String customerReviewPath = "//h4[text()='Avg. Customer Review']";
-    private String primeCheckboxPath = "//*[@name='s-ref-checkbox-419158031']";
+    private String primeCheckboxPath = "//*[@id='leftNav']/ul[7]/div/li[1]/span/span/div/label/input";
     private String primeSearchResultsPath = "//*[@class='s-result-list s-search-results sg-row']/*";
 
     public GiftCardsPage(RemoteWebDriver driver) {
