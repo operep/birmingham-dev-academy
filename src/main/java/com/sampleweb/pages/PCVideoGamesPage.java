@@ -207,8 +207,8 @@ public class PCVideoGamesPage extends HomePage {
         return 0;
       }
 
-      // Assuming that reviews are initially based of the average review and if they are the same
-      // check the number of reviews
+      // Assuming that reviews are based on the average review first and if they are the same
+      // then check the number of reviews
       if (avgReview < previous.avgReview || (avgReview == previous.avgReview
           && numReviews <= previous.numReviews)) {
         return -1;
