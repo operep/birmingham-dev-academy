@@ -12,6 +12,9 @@ public class PCVideoGamesPage extends HomePage {
 
   public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dvideogames&field-keywords=";
 
+  ////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////               Web Elements                   ///////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////
   @FindBy(xpath = "//h1[text()='PC and Video Games']")
   private WebElement title;
 
@@ -30,8 +33,8 @@ public class PCVideoGamesPage extends HomePage {
   @FindBy(xpath = "//input[@type='checkbox' and @name='s-ref-checkbox-419158031']")
   private WebElement primeCheckBox;
 
-  @FindBy(xpath = "//div[contains(@class,'s-result-list')]")
-  private WebElement productsDiv;
+  @FindBy(xpath = "//div[contains(@class, 's-search-results')]/div")
+  private List<WebElement> products;
 
   @FindBy(xpath = "//input[@id='twotabsearchtextbox']")
   private WebElement searchBox;
@@ -75,8 +78,6 @@ public class PCVideoGamesPage extends HomePage {
     primeCheckBox.click();
 
     // All the products
-    List<WebElement> products = productsDiv.findElements(By.xpath("*"));
-
     for (WebElement product : products) {
       try {
         // contains the prime label or a span which contains more buying choices
