@@ -5,6 +5,8 @@ import com.sampleweb.framework.PageNavigator;
 import com.sampleweb.pages.ElectronicsPhotoPage;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -85,8 +87,8 @@ public class ElectronicsPhotoTests extends BaseTest {
     @Test(groups = "regression")
     public void ratingSortByStarsTest() throws Exception {
         setUp();
-        float prevScore = 5.0f;
-
+        float prevScore = Collections.max(electronicsPhotoPage.getReviewScores());
+        System.out.println(prevScore);
         for (float currScore : electronicsPhotoPage.getReviewScores()) {
             assertThat(currScore, lessThanOrEqualTo(prevScore));
             prevScore = currScore;
