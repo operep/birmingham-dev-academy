@@ -54,4 +54,11 @@ public class MusicalInstrumentsTests extends BaseTest {
         musicalInstrumentsPage.checkPrimeBoxVerifyPrimeLabels();
     }
 
+    @Test (groups = "regression")
+    public void musicalInstrumentsFilterByCustomerScoreCheckOrderTest() throws Exception {
+        loadMusicalInstrumentsPage();
+        assertThat(musicalInstrumentsPage.filterByReviews(), is(false));
+    }
+
+
 }
