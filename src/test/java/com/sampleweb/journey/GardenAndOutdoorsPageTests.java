@@ -3,17 +3,15 @@ package com.sampleweb.journey;
 import com.sampleweb.BaseTest;
 import com.sampleweb.framework.PageNavigator;
 import com.sampleweb.pages.GardenAndOutdoors;
-import com.sampleweb.pages.HomePage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class ShuaibTests extends BaseTest {
+public class GardenAndOutdoorsPageTests extends BaseTest {
 
     private PageNavigator navigator = new PageNavigator();
-    private HomePage homePage;
     private GardenAndOutdoors gardenAndOutdoorsPage;
 
     @BeforeMethod
@@ -21,82 +19,48 @@ public class ShuaibTests extends BaseTest {
         gardenAndOutdoorsPage = navigator.navigateToPage(driver, GardenAndOutdoors.PATH, GardenAndOutdoors.class);
     }
 
-    /*@BeforeMethod
-    public void setUp() throws Exception {
-        gardenAndOutdoorsPage = navigator.navigateToPage(driver, homePage.PATH, GardenAndOutdoors.class);
-    }*/
-
-    @Test(groups = "regression")
-    public void gardenProductsNavigationPageTest() {
-        assertThat(gardenAndOutdoorsPage.isLoaded(), is(true));
-    }
-
     @Test (groups = "regression")
     public void gardenProductsUrlNavigationPageTest() {
-        assertThat(gardenAndOutdoorsPage.isLoaded(), is(true));
+        assertThat(gardenAndOutdoorsPage.isPageLoaded(), is(true));
     }
 
     @Test (groups = "regression")
     public void setDepartmentDropdownTest() {
         gardenAndOutdoorsPage.setDepartmentDropdown(GardenAndOutdoors.TITLE);
-        delayDriver();
-    }
-
-    @Test (groups = "regression")
-    public void navigateToThisPage() {
-        gardenAndOutdoorsPage.navigateToGardenAndOutdoorsPage();
-        delayDriver();
     }
 
     @Test (groups = "regression")
     public void checkTitleCorrect() throws Exception {
         assertThat(gardenAndOutdoorsPage.isTitleCorrect(), is(true));
-        delayDriver();
     }
 
     @Test (groups = "regression")
     public void checkGlobalStoreExists() {
         assertThat(gardenAndOutdoorsPage.isGlobalStore(), is(true));
-        delayDriver();
     }
 
     @Test (groups = "regression")
     public void checkAverageCustomerReviewsExist() {
         assertThat(gardenAndOutdoorsPage.isAverageCustomerReviewDisplayed(), is(true));
-        delayDriver();
     }
 
     @Test (groups = "regression")
     public void checkTitleAndLinkHeaderCorrectTest() throws Exception {
         assertThat(gardenAndOutdoorsPage.isTitleAndMenuLinkEqual(), is(true));
-        delayDriver();
     }
 
     @Test (groups = "regression")
-    public void openNewLinkTest() {
+    public void openNewLinkTest() throws Exception {
         assertThat(gardenAndOutdoorsPage.openNewLinkInNewTabAndCheckIfCorrect(), is(true));
-        delayDriver();
     }
 
     @Test (groups = "regression")
     public void primeCheckboxTest() {
         gardenAndOutdoorsPage.makePrimeCheckboxChecked();
-        delayDriver();
     }
 
     @Test (groups = "regression")
     public void isItemsPrimeOnlyTest() {
         assertThat(gardenAndOutdoorsPage.isOnlyPrimeItems(), is(true));
-        delayDriver();
-    }
-
-    private void delayDriver() {
-        synchronized (driver) {
-            try {
-                driver.wait(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

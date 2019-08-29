@@ -12,13 +12,13 @@ import java.util.ArrayList;
 public class GardenAndOutdoors extends HomePage {
 
 
-    private String pageTitle = "//h1[text()=\"Garden & Outdoors\"]";
+    private String pageTitle = "//h1[text()='Garden & Outdoors']";
     private String tabHeader = "//span[@class='nav-a-content'][contains(text(),'Garden & Outdoors')]";
     private String tabHeaderLink = "//a[@class='nav-a nav-b']";
     private String globalStore = "//img[@class='s-ref-img-sprite']";
     private String avgCustomerReviews = "//h4[contains(text(),'Avg. Customer Review')]";
     private String primeCheckbox = "//input[@name='s-ref-checkbox-419158031']";
-    private String primeResultsList = "//*[@id=\"search\"]/div[1]/div[2]/div/span[3]/div[1]";
+    private String primeResultsList = "//div[@class='s-result-list s-search-results sg-row']";
     private String primeLabelOrMoreBuyingChoices = "//*[@aria-label='Amazon Prime' or @class='a-size-base a-color-secondary']";
 
     public static String TITLE = "Garden & Outdoors";
@@ -28,7 +28,7 @@ public class GardenAndOutdoors extends HomePage {
         super(driver);
     }
 
-    public boolean isLoaded() {
+    public boolean isPageLoaded() {
         return driver.findElement(By.xpath(pageTitle)).isDisplayed();
     }
 
@@ -42,21 +42,19 @@ public class GardenAndOutdoors extends HomePage {
         setSearchCriteria("").clickSubmitButton();
     }
 
-    public boolean openNewLinkInNewTabAndCheckIfCorrect() {
+    public boolean openNewLinkInNewTabAndCheckIfCorrect() throws Exception {
+        String tabLink = driver.findElement(By.xpath(tabHeaderLink)).getAttribute("href");
+
         ((JavascriptExecutor)driver).executeScript("window.open()");;
         ArrayList<String> tabs = new ArrayList<> (driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1)); //switches to new tab
-        driver.get(driver.findElement(By.xpath(tabHeaderLink)).getAttribute("href"));
+        driver.get(tabLink);
 
-        boolean correctTitle;
-        try {
-            correctTitle = isTitleCorrect();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        boolean correctTitle = isTitleCorrect();
+
         driver.switchTo().window(tabs.get(0)); // switch back to main screen
         driver.switchTo().window(tabs.remove(1));
+
         return correctTitle;
     }
 
