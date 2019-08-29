@@ -21,7 +21,7 @@ public class SportsAndOutdoorsPage extends HomePage {
     private WebElement primeCheckbox;
     @FindBy(xpath = "//*[@id=\"leftNav\"]//*[@class=\"a-icon a-icon-star-medium a-star-medium-4\"]/span")
     private WebElement fourStarsOrMore;
-    @FindBy(xpath = "//*[@id=\"a-autoid-0-announce\"]")
+    @FindBy(id = "a-autoid-0-announce")
     private WebElement sortByComboBox;
     @FindBy(xpath = "//*[@id=\"s-result-sort-select_3\"]")
     private WebElement avgReviewInSortByComboBox;
@@ -81,13 +81,16 @@ public class SportsAndOutdoorsPage extends HomePage {
 
         Iterator<WebElement> itr = allStarRatingsOnPage.iterator();
         double previousRating = 5.0;
+        int i = 0;
 
         while (itr.hasNext()) {
-            double currentRating = Double.parseDouble(itr.next().getText().substring(0,2));
+            // Takes the 
+            double currentRating = Double.parseDouble(itr.next().getAttribute("innerText").substring(0,2));
             if (currentRating < 4.0 || currentRating > previousRating){
                 return false;
             }
             previousRating = currentRating;
+            i++;
         }
         return true;
 
