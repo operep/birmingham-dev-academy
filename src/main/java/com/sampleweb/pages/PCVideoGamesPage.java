@@ -1,9 +1,9 @@
 package com.sampleweb.pages;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
