@@ -4,9 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
-
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
 
 public class GiftCardsPage extends HomePage {
@@ -61,7 +59,7 @@ public class GiftCardsPage extends HomePage {
      */
     public boolean verifyGiftCardPageTitle() {
         try{
-            return super.verifyTitle(title, driver.findElement(By.xpath("//*[@id='nav-subnav']/a[1]/span")).getText());
+            return super.verifyTitle(title, pageTitle.getText());
         } catch (Exception e) {
             e.printStackTrace();
         }
