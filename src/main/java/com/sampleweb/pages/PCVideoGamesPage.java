@@ -110,8 +110,13 @@ public class PCVideoGamesPage extends HomePage {
 
     for (WebElement product : products) {
       WebElement avgReviewElement = product.findElement(By.xpath(".//span[@class='a-icon-alt']"));
+
+      // Remove possible occurrence of best seller label
+      String text = product.getText();
+      text = formatText(text);
+
       // Extract the average review and the number of reviews
-      int numReviews = Integer.parseInt(product.getText().split(("\n"))[1]);
+      int numReviews = Integer.parseInt(text.split(("\n"))[1]);
       float avgReview = Float.parseFloat(avgReviewElement.getAttribute("innerHTML").split(" ")[0]);
       Review current = new Review(numReviews, avgReview);
 
@@ -124,6 +129,11 @@ public class PCVideoGamesPage extends HomePage {
     }
 
     return true;
+  }
+
+  private String formatText(String text) {
+    text = text.replaceFirst("Best Seller\n", "");
+    return text;
   }
 
   /**
@@ -192,9 +202,13 @@ public class PCVideoGamesPage extends HomePage {
       if (previous.numReviews == -1 || numReviews == -1) {
         return -1;
       }
+
       if (this.equals(previous)) {
         return 0;
       }
+
+      // Assuming that reviews are initially based of the average review and if they are the same
+      // check the number of reviews
       if (avgReview < previous.avgReview || (avgReview == previous.avgReview
           && numReviews <= previous.numReviews)) {
         return -1;
