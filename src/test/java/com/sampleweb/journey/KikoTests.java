@@ -28,22 +28,22 @@ public class KikoTests extends BaseTest {
         assertThat(page.navigateToBabyPageViaDropDown(), is(true));
     }
     @Test (groups = "regression")
-    public void babyPageGlobalStoreTest() throws Exception {
+    public void babyPageGlobalStoreTest() {
         assertThat(babyPage.globalStoreOption.isDisplayed(), is(true));
     }
 
     @Test (groups = "regression")
-    public void babyPageAverageCustomerReviewTest() throws Exception {
+    public void babyPageAverageCustomerReviewTest() {
         assertThat(babyPage.avgCustomerReviewOption.isDisplayed(), is(true));
     }
 
     @Test (groups = "regression")
-    public void isCategoryNameLinkSameAsTitleTest() throws Exception {
+    public void isCategoryNameLinkSameAsTitleTest() {
         assertThat(babyPage.isCategoryNameLinkSameAsTitle(), is(true));
     }
 
     @Test (groups = "regression")
-    public void navigateToBabyPageViaSubnavTest() throws Exception {
+    public void navigateToBabyPageViaSubnavTest() {
         assertThat(babyPage.navigateToBabyPageViaSubnav(), is(true));
     }
 

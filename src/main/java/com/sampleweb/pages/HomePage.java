@@ -25,7 +25,7 @@ public class HomePage extends Page {
         this.driver = driver;
     }
 
-    public boolean navigateToBabyPage() {
+    public boolean navigateToBabyPageViaDropDown() {
         dropDownBox.findElement(By.xpath("//option[text()='Baby']")).click();
         submitButtonLocator.click();
         return driver.getCurrentUrl().equals(BabyPage.PATH);

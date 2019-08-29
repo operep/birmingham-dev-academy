@@ -1,13 +1,11 @@
 package com.sampleweb.pages;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BabyPage extends HomePage {
 
@@ -43,7 +41,7 @@ public class BabyPage extends HomePage {
     }
 
     public boolean navigateToBabyPageViaSubnav() {
-        navigateToBabyPage();
+        navigateToBabyPageViaDropDown();
         String titleBefore = pageTitleElement.getText();
         WebElement element = driver.findElementByXPath("//div[@data-category='baby']/a[@href=\"/Baby-Car-Seats-Prams-Nursery/b/?ie=UTF8&node=59624031&ref_=topnav_storetab_by\"]");
         element.click();
@@ -51,7 +49,7 @@ public class BabyPage extends HomePage {
     }
 
     public boolean checkPrimeLabels() {
-        navigateToBabyPage();
+        navigateToBabyPageViaDropDown();
         primeCheckBox.click();
         int prevSize = searchResults.size();
         System.out.println(prevSize);
