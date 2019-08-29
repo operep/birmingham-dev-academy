@@ -20,7 +20,7 @@ public class GiftCardsPageTests extends BaseTest {
 
     @BeforeMethod
     public void setUp() throws Exception {
-        giftCardsPage = navigator.navigateToPage(driver, GiftCardsPage.getPath(), GiftCardsPage.class);
+        giftCardsPage = navigator.navigateToPage(driver, GiftCardsPage.PATH, GiftCardsPage.class);
     }
 
     @Test(groups="regression")

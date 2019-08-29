@@ -4,44 +4,51 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class GiftCardsPage extends HomePage {
     private String title = "Gift Cards & Top Up";
-    private static String PATH = "https://www.amazon.co.uk/Giftcards-Giftvouchers-Vouchers-Birthday-Gifts/b/?ie=UTF8&node=1571304031&ref_=topnav_storetab_gc";
-    private String dropdownOptionPath = "//*[@id='searchDropdownBox']";
-    private String globalStoreSelectionPath = "//h4[text()='Global Store']";
-    private String customerReviewPath = "//h4[text()='Avg. Customer Review']";
-    private String primeCheckboxPath = "//*[@id='leftNav']/ul[7]/div/li[1]/span/span/div/label/input";
-    private String primeSearchResultsPath = "//*[@class='s-result-list s-search-results sg-row']/*";
+    public static String PATH = "https://www.amazon.co.uk/Giftcards-Giftvouchers-Vouchers-Birthday-Gifts/b/?ie=UTF8&node=1571304031&ref_=topnav_storetab_gc";
+
+    @FindBy(xpath = "//*[@id='searchDropdownBox']")
+    private WebElement dropdownOption;
+    @FindBy(xpath = "//h4[text()='Global Store']")
+    private List<WebElement> globalStoreSelection;
+    @FindBy(xpath = "//h4[text()='Avg. Customer Review']")
+    private List<WebElement> customerReview;
+    @FindBy(xpath = "//*[@name='s-ref-checkbox-419158031']")
+    private WebElement primeCheckbox;
+    @FindBy(xpath = "//*[@class='s-result-list s-search-results sg-row']/*")
+    private List<WebElement> primeSearchResults;
+    @FindBy(xpath = "//*[@id='nav-subnav']/a[1]/span")
+    private WebElement giftCardMenuButton;
+    @FindBy(xpath = "//*[@id='nav-search']/form/div[2]/div/input")
+    private WebElement searchButton;
+    @FindBy(xpath = "//*[@id='nav-subnav']/a[1]")
+    private WebElement pageTitle;
 
     public GiftCardsPage(RemoteWebDriver driver) {
         super(driver);
-    }
-
-    public static String getPath(){
-        return PATH;
     }
 
     /**
      * Check page has loaded correctly after navigating to the gift cards page from the amazon home screen
      */
     public boolean isPageLoaded() {
-        //Starting from home page rather than PATH
-        PATH = "https://www.amazon.co.uk";
-        driver.get(PATH);
         selectGiftCardsFromDropdown();
-        WebElement element = driver.findElement(By.xpath("//*[@id='nav-subnav']/a[1]"));
-        return element.isDisplayed() && verifyGiftCardPageTitle();
+        return pageTitle.isDisplayed();
     }
 
     /**
      * Navigate to gift card page using drop down list
      */
     private GiftCardsPage selectGiftCardsFromDropdown(){
-        clickButton(dropdownOptionPath);
-        Select select = new Select(driver.findElement(By.xpath(dropdownOptionPath)));
+        clickButton(dropdownOption);
+        Select select = new Select(dropdownOption);
         select.selectByValue("search-alias=gift-cards");
-        clickButton("//*[@id='nav-search']/form/div[2]/div/input");
+        clickButton(searchButton);
         return this;
     }
 
@@ -63,7 +70,7 @@ public class GiftCardsPage extends HomePage {
      * @return true if global store selection exists
      */
     public boolean verifyGiftCardPageGlobalStoreSelectionExists(){
-        return checkIfElementExists(globalStoreSelectionPath);
+        return checkIfElementExists(globalStoreSelection);
     }
 
     /**
@@ -71,7 +78,7 @@ public class GiftCardsPage extends HomePage {
      * @return true if section exists
      */
     public boolean verifyGiftCardPageCustomerReviewExists(){
-        return checkIfElementExists(customerReviewPath);
+        return checkIfElementExists(customerReview);
     }
 
     /**
@@ -79,12 +86,16 @@ public class GiftCardsPage extends HomePage {
      * @return true if redirected to same page
      */
     public boolean verifyGiftCardMenuButtonRedirection() {
-        clickButton("//*[@id='nav-subnav']/a[1]/span");
+        clickButton(giftCardMenuButton);
         return PATH.equals(driver.getCurrentUrl());
     }
 
-    private GiftCardsPage clickButton(String buttonXPath){
-        driver.findElement(By.xpath(buttonXPath)).click();
+    /**
+     * Click button using util class
+     * @param webElement element to be clicked
+     */
+    private GiftCardsPage clickButton(WebElement webElement){
+        webElement.click();
         return this;
     }
 
@@ -94,16 +105,20 @@ public class GiftCardsPage extends HomePage {
      * @return true if all items have prime label
      */
     public boolean verifyPrimeCheckboxResultsList(){
-        clickButton(primeCheckboxPath);
-        return driver.findElements(By.xpath(primeSearchResultsPath)).iterator().next().findElement(By.className("a-icon-prime")).isDisplayed();
+        clickButton(primeCheckbox);
+        boolean isDisplayed = true;
+           for(WebElement result : primeSearchResults) {
+               isDisplayed = result.findElement(By.className("a-icon-prime")).isDisplayed();
+        }
+        return isDisplayed;
     }
 
     /**
      * Checks if element exists on gift cards page
-     * @param elementXPath - xpath of element to be checked
      * @return true if exists
      */
-    private boolean checkIfElementExists(String elementXPath){
-        return driver.findElements(By.xpath(elementXPath)).size() != 0;
+    private boolean checkIfElementExists(List<WebElement> element){
+        return element.size() != 0;
     }
+
 }
