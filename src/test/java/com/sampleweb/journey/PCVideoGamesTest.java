@@ -8,6 +8,8 @@ import com.sampleweb.pages.PCVideoGamesPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+// Suppress the 'regression is undefined' warning
+@SuppressWarnings("groupsTestNG")
 public class PCVideoGamesTest extends BaseTest {
 
   private PCVideoGamesPage page;
@@ -49,7 +51,6 @@ public class PCVideoGamesTest extends BaseTest {
 
   @Test (groups = "regression")
   void gameCheckPrimeItems() {
-    page.checkPrime();
     assertTrue(page.checkPrimeItems());
   }
 

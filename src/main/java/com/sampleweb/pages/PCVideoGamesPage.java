@@ -5,74 +5,85 @@ import java.util.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 public class PCVideoGamesPage extends HomePage {
 
   public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dvideogames&field-keywords=";
 
+  @FindBy(xpath = "//h1[text()='PC and Video Games']")
+  private WebElement title;
+
+  @FindBy(name = "url")
+  private WebElement dropDown;
+
+  @FindBy(xpath = "//h4[text()='Global Store']")
+  private WebElement globalStore;
+
+  @FindBy(xpath = "//h4[text()='Avg. Customer Review']")
+  private WebElement avgReviewHeader;
+
+  @FindBy(xpath = "//span[@class='nav-a-content' and contains(text(), 'Video Games')]")
+  private WebElement firstNavLink;
+
+  @FindBy(xpath = "//input[@type='checkbox' and @name='s-ref-checkbox-419158031']")
+  private WebElement primeCheckBox;
+
+  @FindBy(xpath = "//div[contains(@class,'s-result-list')]")
+  private WebElement productsDiv;
+
+  @FindBy(xpath = "//input[@id='twotabsearchtextbox']")
+  private WebElement searchBox;
+
   public PCVideoGamesPage(RemoteWebDriver driver) {
     super(driver);
   }
 
   public boolean isLoaded() {
-    return driver.findElement(By.xpath("//h1[text()='PC and Video Games']")).isDisplayed();
+    return title.isDisplayed();
   }
 
   public void navigateByDropdown() {
     // Get the dropdown and select the video games item
-    Select drop = new Select(driver.findElement(By.name("url")));
+    Select drop = new Select(dropDown);
     drop.selectByValue("search-alias=videogames");
     // Empty the search box and then search
-    driver.findElement(By.xpath(searchBoxLocator)).clear();
+    searchBox.clear();
     submitButtonLocator.click();
   }
 
   public boolean hasGlobal() {
-    return driver.findElement(By.xpath("//h4[text()='Global Store']")).isDisplayed();
+    return globalStore.isDisplayed();
   }
 
   public boolean hasAvgReview() {
-    return driver.findElement(By.xpath("//h4[text()='Avg. Customer Review']")).isDisplayed();
+    return avgReviewHeader.isDisplayed();
   }
 
   public boolean hasSameFirstNavLink() {
-    return getFirstNavLink().isDisplayed();
+    return firstNavLink.isDisplayed();
   }
 
   public boolean firstLinkSameNav() {
-    getFirstNavLink().click();
+    firstNavLink.click();
     return isLoaded();
   }
 
-  private WebElement getFirstNavLink() {
-    return driver.findElement(
-        By.xpath("//*[@id='nav-subnav']/a[1]/span"));
-  }
-
-  public boolean checkPrime() {
-    WebElement input = driver.findElement(
-        By.xpath("//*[@id='leftNav']/ul[5]/div/li[1]/span/span/div/label/input"));
-    input.click();
-    input = driver.findElement(By.xpath("//*[@id='p_76/419158031']/span/a/div/label/input"));
-    return input.isSelected();
-  }
-
   public boolean checkPrimeItems() {
-    // Get the parent div
-    WebElement div = driver.findElement(
-        By.xpath("//div[contains(@class,'s-result-list')]"));
+    // Check the prime checkbox
+    primeCheckBox.click();
 
     // All the products
-    List<WebElement> children = div.findElements(By.xpath("*"));
+    List<WebElement> products = productsDiv.findElements(By.xpath("*"));
 
-    for (WebElement child : children) {
+    for (WebElement product : products) {
       try {
         // contains the prime label or a span which contains more buying choices
         // don't need to store in a variable, just want it too exist
-        child.findElement(By.xpath(
+        product.findElement(By.xpath(
             ".//i[@aria-label='Amazon Prime'] | .//span[contains(text(), 'More buying choices')]"))
-             .isDisplayed();
+               .isDisplayed();
       } catch (NoSuchElementException e) {
         // no prime or more... so fail
         return false;
