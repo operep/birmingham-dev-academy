@@ -30,24 +30,24 @@ public class LuxuryBeautyTests extends BaseTest {
 
     @Test (groups = "regression")
     public void checkIfGlobalStoreExistTest() throws Exception {
-        assertThat(luxuryBeautyPage.getGlobalStore().isDisplayed(), is(true));
+        assertThat(luxuryBeautyPage.isGlobalStoreBoxDisplayed(), is(true));
     }
 
     @Test (groups = "regression")
     public void checkCustomerReviewExistTest() throws Exception {
-        assertThat(luxuryBeautyPage.getCustomerReview().isDisplayed(), is(true));
+        assertThat(luxuryBeautyPage.isCustomerReviewDisplayed(), is(true));
     }
 
 
     @Test (groups = "regression")
     public void checkFirstLinkSecondMenuSameAsCatTest() throws Exception {
-        assertThat(luxuryBeautyPage.getImageLabelOfCurrentPage().getAttribute("alt"), is(luxuryBeautyPage.getTitle()));
+        assertThat(luxuryBeautyPage.getImageLabelOfCurrentPage(), is(luxuryBeautyPage.getTitle()));
     }
 
     @Test (groups = "regression")
     public void checkIfLinkDirectsToSamePageTest() throws Exception {
         luxuryBeautyPage.clickFirstLinkSecondMenu();
-        assertThat(luxuryBeautyPage.getImageLabelOfCurrentPage().getAttribute("alt"), is(luxuryBeautyPage.getTitle()));
+        assertThat(luxuryBeautyPage.getImageLabelOfCurrentPage(), is(luxuryBeautyPage.getTitle()));
     }
 
     @Test (groups = "regression")
