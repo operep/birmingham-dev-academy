@@ -55,5 +55,10 @@ public class LuxuryBeautyTests extends BaseTest {
         assertThat(luxuryBeautyPage.checkIfAllElementsDisplayedArePrimeOrAddMore(), is(true));
     }
 
+    @Test (groups = "regression")
+    public void checkIfOrderOfProductsBasedOnCustomerReviewsForFourStarsOrMore() throws Exception {
+        assertThat(luxuryBeautyPage.checkIfAllProductsAreInTheRightOrderBasedOnReview(), is(true));
+    }
+
 
 }
