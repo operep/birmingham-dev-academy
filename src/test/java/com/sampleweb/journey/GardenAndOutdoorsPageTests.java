@@ -73,4 +73,9 @@ public class GardenAndOutdoorsPageTests extends BaseTest {
     public void orderByRatingTest() {
         gardenAndOutdoorsPage.selectHighestReviewLevel().orderByRating();
     }
+
+    @Test(groups = "regression")
+    public void isItemsSortedByOrderTest() {
+        gardenAndOutdoorsPage.selectHighestReviewLevel().orderByRating().isItemsSortedByOrder();
+    }
 }
