@@ -1,45 +1,59 @@
 package com.sampleweb.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class DVDPage extends HomePage {
 
     public static String TITLE = "DVD & Blu-ray";
+
+    @FindBy(css = ".bxw-pageheader__title__text>h1")
+    private WebElement title;
+    @FindBy(xpath = "//h4[text()='Avg. Customer Review']")
+    private WebElement globalStoreHeading;
+    @FindBy(xpath = "//h4[text()='Global Store']")
+    private WebElement avgReviewHeading;
+    @FindBy(css = "div#nav-subnav>a:first-child>span")
+    private WebElement pageLink;
+    @FindBy(xpath = "//*[@id='leftNav']/ul[13]/div/li[1]")
+    private WebElement primeCheckbox;
+    @FindBy(xpath = "//*[@class='s-result-list s-search-results sg-row']/div")
+    private List<WebElement> products;
 
     public DVDPage(RemoteWebDriver driver) {
         super(driver);
     }
 
     public String getTitleText() {
-        return getElementText(By.cssSelector(".bxw-pageheader__title__text>h1"));
+        return title.getText();
     }
 
     public boolean hasGlobalStore() {
-        return isElementVisible(By.xpath("//h4[text()='Global Store']"));
+        return globalStoreHeading.isDisplayed();
     }
 
     public boolean hasAvgReview() {
-        return isElementVisible(By.xpath("//h4[text()='Avg. Customer Review']"));
+        return avgReviewHeading.isDisplayed();
     }
 
     public String getPageLinkText() {
-        return getElementText(By.cssSelector("div#nav-subnav>a:first-child>span"));
+        return pageLink.getText();
     }
 
     public void clickPageLink() {
-        clickElement(By.cssSelector("div#nav-subnav>a:first-child"));
+        pageLink.click();
     }
 
     public void clickPrimeCheckbox() {
-        clickElement(By.xpath("//*[@id='leftNav']/ul[13]/div/li[1]"));
+        primeCheckbox.click();
     }
 
     public List<WebElement> getProductsOnPage() {
-        return driver.findElements(By.xpath("//*[@class='s-result-list s-search-results sg-row']/div"));
+        return products;
     }
 
 }
