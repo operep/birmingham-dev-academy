@@ -9,7 +9,7 @@ import static org.hamcrest.core.Is.is;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class AntoniaTests extends BaseTest {
+public class ElectronicsPhotoTests extends BaseTest {
 
     private PageNavigator navigator = new PageNavigator();
     private ElectronicsPhotoPage electronicsPhotoPage;
