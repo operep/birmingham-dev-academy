@@ -3,14 +3,15 @@ package com.sampleweb.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends Page {
 
     protected RemoteWebDriver driver;
-    private static String HOME_PAGE_TITLE = "Amazon";
-
     protected String searchBoxLocator = "//input[@id='twotabsearchtextbox']";
-    protected String submitButtonLocator = "//input[@type='submit']";
+
+    @FindBy(xpath = "//input[@type='submit']")
+    protected WebElement submitButtonLocator;
 
     public HomePage(RemoteWebDriver driver) {
         super(driver);
@@ -22,10 +23,6 @@ public class HomePage extends Page {
     }
 
     public void clickSubmitButton() {
-        driver.findElementByXPath(submitButtonLocator).click();
-    }
-
-    public boolean isTitleCorrect() throws Exception {
-        return verifyTitle(driver.getTitle(), HOME_PAGE_TITLE);
+        submitButtonLocator.click();
     }
 }

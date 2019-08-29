@@ -47,10 +47,11 @@ public abstract class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void setupBaseTest() throws Exception {
         System.out.println(isLocal());
+        dr = DesiredCapabilities.chrome();
         if(isLocal().equals("true")){
             driver = new ChromeDriver();
+//            driver = new RemoteWebDriver(new URL(gridLocalUrl()), dr);
         } else {
-            dr = DesiredCapabilities.chrome();
             driver = new RemoteWebDriver(new URL(gridUrl()), dr);
         }
         driver.get(baseUrl());
@@ -74,6 +75,10 @@ public abstract class BaseTest {
 
     public String gridUrl() {
         return getProp("test.gridUrl");
+    }
+
+    public String gridLocalUrl() {
+        return getProp("test.gridLocalUrl");
     }
 
     public String baseUrl() {

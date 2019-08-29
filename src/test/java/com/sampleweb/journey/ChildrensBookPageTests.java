@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class OlekTests extends BaseTest {
+public class ChildrensBookPageTests extends BaseTest {
 
     private PageNavigator navigator = new PageNavigator();
     private ChildrensBooksPage childrensBooksPage;
@@ -21,12 +21,12 @@ public class OlekTests extends BaseTest {
 
     @Test (groups = "regression")
     public void babyProductsNavigationPageTest() {
-        assertThat(childrensBooksPage.isLoaded(), is(true));
+        assertThat(childrensBooksPage.isPageLoaded(), is(true));
     }
 
     @Test (groups = "regression")
     public void babyProductsUrlNavigationPageTest() {
-        assertThat(childrensBooksPage.isLoaded(), is(true));
+        assertThat(childrensBooksPage.isPageLoaded(), is(true));
     }
 
     @Test (groups = "regression")

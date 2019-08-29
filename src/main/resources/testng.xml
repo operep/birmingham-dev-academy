@@ -3,7 +3,7 @@
     <test name="GRID TEST WITH SERIAL EXECUTION WITH BROWSER FF">
         <parameter name ="browserType" value="firefox"/>
         <classes>
-            <class name ="com.sampleweb.journey.GridExample"/>
+            <class name ="com.sampleweb.journey.ChildrensBookPageTests"/>
         </classes>
     </test>
     <!-- <test name="GRID TEST WITH SERIAL EXECTION WITH BROWSER CHROME">
