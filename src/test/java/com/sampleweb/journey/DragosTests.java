@@ -16,41 +16,42 @@ import static org.hamcrest.core.Is.is;
 public class DragosTests extends BaseTest {
 
     private PageNavigator navigator = new PageNavigator();
-    private BooksPage BooksPage;
+    private BooksPage booksPage;
 
     @BeforeMethod
     public void setUp() throws Exception {
-        BooksPage = navigator.navigateToPage(driver, com.sampleweb.pages.BooksPage.PATH, BooksPage.class);
-        BooksPage.selectBooks();
+        booksPage = navigator.navigateToPage(driver, BooksPage.PATH, BooksPage.class);
+        //booksPage = navigator.navigateToPage(driver, booksPage.PATH, BooksPage.class);
+        booksPage.selectBookCategory();
     }
 
     @Test (groups = "regression")
     public void checkTitleMatchTest() {
-        assertThat(BooksPage.doesTitleMatch(), is(true));
+        assertThat(booksPage.isTitleMatching(), is(true));
     }
 
     @Test (groups = "regression")
     public void checkGlobalStoreExistsTest() {
-        assertThat(BooksPage.isGlobalStoreDisplayed(), is(true));
+        assertThat(booksPage.isGlobalStoreDisplayed(), is(true));
     }
 
     @Test (groups = "regression")
     public void checkAvgCustomerExistsTest() {
-        assertThat(BooksPage.isAvgCustomerDisplayed(), is(true));
+        assertThat(booksPage.isAvgCustomerDisplayed(), is(true));
     }
 
     @Test (groups = "regression")
-    public void checkSecondLineMenuMatchsTest() {
-        assertThat(BooksPage.doesSecondLineMatchs(), is(true));
+    public void checkPageSameAfterMenuLinkClicked() {
+        assertThat(booksPage.isTitleSameAfterClickingMenuLink(), is(true));
     }
 
     @Test (groups = "regression")
-    public void checkClickedLinkSameTest() {
-        assertThat(BooksPage.isSameWhenClicked(), is(true));
+    public void checkSamePageAfter() {
+        assertThat(booksPage.isPageSameAfterMenuLinkClicked(), is(true));
     }
 
     @Test (groups = "regression")
-    public void checkPrimeBoxTest() {
-        assertThat(BooksPage.isPrimeBoxEverywhere(), is(true));
+    public void checkEveryElementContainsPrimeLabelTests() {
+        assertThat(booksPage.isEveryElementWithPrimeLabel(), is(true));
     }
 }
