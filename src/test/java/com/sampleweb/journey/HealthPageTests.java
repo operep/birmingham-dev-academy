@@ -29,7 +29,7 @@ public class HealthPageTests extends BaseTest {
 
     @Test(groups = "regression")
     public void healthPageValidTitleTest() throws Exception {
-        assertThat(healthPage.verifyHealthTitleExists(), is(true));
+        assertThat(healthPage.verifyFirstLinkHasCatagoryName(), is(true));
     }
 
     @Test(groups = "regression")
@@ -43,11 +43,6 @@ public class HealthPageTests extends BaseTest {
     }
 
     @Test(groups = "regression")
-    public void healthEnsureHeaderTitleIsCorrectTest() throws Exception {
-        assertThat(healthPage.verifyFirstLinkHasCatagoryName(), is(true));
-    }
-
-    @Test(groups = "regression")
     public void healthValidateNavigationRedirectsCorrectlyTest() throws Exception{
         assertThat(healthPage.verifyClickOnHeaderMenuDirectsToSamePage(), is(true));
     }
@@ -57,6 +52,6 @@ public class HealthPageTests extends BaseTest {
         assertThat(healthPage.verifySelectPrimeReturnsOnlyPrimeitems(), is (true));
     }
 
-    @Test(groups = "regression")
+    //@Test(groups = "regression")
 
 }
