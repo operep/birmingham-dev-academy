@@ -2,6 +2,7 @@ package com.sampleweb.pages;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -38,6 +39,13 @@ public class PCVideoGamesPage extends HomePage {
 
   @FindBy(xpath = "//input[@id='twotabsearchtextbox']")
   private WebElement searchBox;
+
+  @FindBy(xpath = "//span[text() = '4 Stars & Up']")
+  private WebElement fourStarReview;
+
+  @FindBy(xpath = "//select[@id='s-result-sort-select']/option[text()='Avg. Customer Review']")
+  private WebElement avgReviewSortOption;
+
 
   public PCVideoGamesPage(RemoteWebDriver driver) {
     super(driver);
@@ -91,5 +99,107 @@ public class PCVideoGamesPage extends HomePage {
       }
     }
     return true;
+  }
+
+  public boolean checkReviewOrder() {
+    fourStarReview.click();
+
+    avgReviewSortOption.click();
+
+    Review previous = new Review();
+
+    for (WebElement product : products) {
+      WebElement avgReviewElement = product.findElement(By.xpath(".//span[@class='a-icon-alt']"));
+      // Extract the average review and the number of reviews
+      int numReviews = Integer.parseInt(product.getText().split(("\n"))[1]);
+      float avgReview = Float.parseFloat(avgReviewElement.getAttribute("innerHTML").split(" ")[0]);
+      Review current = new Review(numReviews, avgReview);
+
+      // Compare the review
+      if (current.compareTo(previous) <= 0) {
+        previous = current;
+      } else {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Class to compare reviews for products
+   */
+  private class Review implements Comparable<Review> {
+
+    /**
+     * Number of reviews for the product, -1 by default
+     */
+    private int numReviews;
+
+    /**
+     * Average review for the product, -1 by default
+     */
+    private float avgReview;
+
+    /**
+     * Initialise a review to default values
+     */
+    public Review() {
+      numReviews = -1;
+      avgReview = -1;
+    }
+
+    /**
+     * Initialise a review with the passed values. Although no checks are given it is assumed these
+     * will be > 0
+     *
+     * @param numReviews number of reviews for the product
+     * @param avgReview  average review for the product
+     */
+    public Review(int numReviews, float avgReview) {
+      this.numReviews = numReviews;
+      this.avgReview = avgReview;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
+      Review review = (Review) o;
+      return numReviews == review.numReviews &&
+          Float.compare(avgReview, review.avgReview) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(numReviews, avgReview);
+    }
+
+    @Override
+    public String toString() {
+      return "Review{" +
+          "numReviews=" + numReviews +
+          ", avgReview=" + avgReview +
+          '}';
+    }
+
+    @Override
+    public int compareTo(Review previous) {
+      if (previous.numReviews == -1 || numReviews == -1) {
+        return -1;
+      }
+      if (this.equals(previous)) {
+        return 0;
+      }
+      if (avgReview < previous.avgReview || (avgReview == previous.avgReview
+          && numReviews <= previous.numReviews)) {
+        return -1;
+      }
+      return 1;
+    }
   }
 }

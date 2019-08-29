@@ -1,5 +1,6 @@
 package com.sampleweb.journey;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import com.sampleweb.BaseTest;
@@ -52,6 +53,11 @@ public class PCVideoGamesTest extends BaseTest {
   @Test (groups = "regression")
   void gameCheckPrimeItems() {
     assertTrue(page.checkPrimeItems());
+  }
+
+  @Test(groups = "regression")
+  void gameCheckReviewOrder() {
+    assertFalse(page.checkReviewOrder());
   }
 
 }
