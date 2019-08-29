@@ -27,7 +27,7 @@ public class DVDTests extends BaseTest {
 
     @Test(groups = "regression")
     public void dvdProductsTitleCorrect() {
-        assertEquals(dvdPage.getTitleText(), DVDPage.TITLE);
+        assertEquals(dvdPage.title.getText(), DVDPage.TITLE);
     }
 
     @Test(groups = "regression")
@@ -42,19 +42,19 @@ public class DVDTests extends BaseTest {
 
     @Test(groups = "regression")
     public void dvdProductsPageLinkTextEqualsCategory() {
-        assertEquals(dvdPage.getPageLinkText(), DVDPage.TITLE);
+        assertEquals(dvdPage.pageLink.getText(), DVDPage.TITLE);
     }
 
     @Test(groups = "regression")
     public void dvdProductsPageLinkNavigatesToSamePage() {
-        dvdPage.clickPageLink();
-        assertEquals(dvdPage.getTitleText(), DVDPage.TITLE);
+        dvdPage.pageLink.click();
+        assertEquals(dvdPage.title.getText(), DVDPage.TITLE);
     }
 
     @Test(groups = "regression")
     public void dvdProductsPrimeItemsHavePrimeLabel() {
-        dvdPage.clickPrimeCheckbox();
-        List<WebElement> products = dvdPage.getProductsOnPage();
+        dvdPage.primeCheckbox.click();
+        List<WebElement> products = dvdPage.products;
         for (WebElement product : products) {
             product.findElement(By.xpath(".//span[text()='FREE Delivery by '] | .//i[@aria-label='Amazon Prime']"));
         }
