@@ -129,7 +129,7 @@ public class PCVideoGamesPage extends HomePage {
   /**
    * Class to compare reviews for products
    */
-  private class Review implements Comparable<Review> {
+  private static class Review implements Comparable<Review> {
 
     /**
      * Number of reviews for the product, -1 by default
@@ -144,7 +144,7 @@ public class PCVideoGamesPage extends HomePage {
     /**
      * Initialise a review to default values
      */
-    public Review() {
+    Review() {
       numReviews = -1;
       avgReview = -1;
     }
@@ -156,7 +156,7 @@ public class PCVideoGamesPage extends HomePage {
      * @param numReviews number of reviews for the product
      * @param avgReview  average review for the product
      */
-    public Review(int numReviews, float avgReview) {
+    Review(int numReviews, float avgReview) {
       this.numReviews = numReviews;
       this.avgReview = avgReview;
     }
