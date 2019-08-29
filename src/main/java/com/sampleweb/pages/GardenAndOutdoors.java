@@ -4,21 +4,36 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GardenAndOutdoors extends HomePage {
 
+    @FindBy(xpath = "//h1[text()='Garden & Outdoors']")
+    protected WebElement pageTitle;
 
-    private String pageTitle = "//h1[text()='Garden & Outdoors']";
-    private String tabHeader = "//span[@class='nav-a-content'][contains(text(),'Garden & Outdoors')]";
-    private String tabHeaderLink = "//a[@class='nav-a nav-b']";
-    private String globalStore = "//img[@class='s-ref-img-sprite']";
-    private String avgCustomerReviews = "//h4[contains(text(),'Avg. Customer Review')]";
-    private String primeCheckbox = "//input[@name='s-ref-checkbox-419158031']";
-    private String primeResultsList = "//div[@class='s-result-list s-search-results sg-row']/div";
-    private String primeLabelOrMoreBuyingChoices = "//*[@aria-label='Amazon Prime' or @class='a-size-base a-color-secondary']";
+    @FindBy(xpath = "//span[@class='nav-a-content'][contains(text(),'Garden & Outdoors')]")
+    protected WebElement tabHeader;
+
+    @FindBy(xpath = "//a[@class='nav-a nav-b']")
+    protected WebElement tabHeaderLink;
+
+    @FindBy(xpath = "//img[@class='s-ref-img-sprite']")
+    protected WebElement globalStore;
+
+    @FindBy(xpath = "//h4[contains(text(),'Avg. Customer Review')]")
+    protected WebElement avgCustomerReviews;
+
+    @FindBy(xpath = "//input[@name='s-ref-checkbox-419158031']")
+    protected WebElement primeCheckbox;
+
+    @FindBy(xpath = "//div[@class='s-result-list s-search-results sg-row']/div")
+    protected List<WebElement> primeResultsList;
+
+    @FindBy(xpath = "//*[@aria-label='Amazon Prime' or @class='a-size-base a-color-secondary']")
+    protected WebElement primeLabelOrMoreBuyingChoices;
 
     public static String TITLE = "Garden & Outdoors";
     public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Doutdoor&field-keywords=";
@@ -28,7 +43,7 @@ public class GardenAndOutdoors extends HomePage {
     }
 
     public boolean isPageLoaded() {
-        return driver.findElement(By.xpath(pageTitle)).isDisplayed();
+        return pageTitle.isDisplayed();
     }
 
     public GardenAndOutdoors setSearchCriteria(String searchText) {
@@ -42,7 +57,7 @@ public class GardenAndOutdoors extends HomePage {
     }
 
     public boolean openNewLinkInNewTabAndCheckIfCorrect() throws Exception {
-        String tabLink = driver.findElement(By.xpath(tabHeaderLink)).getAttribute("href");
+        String tabLink = tabHeaderLink.getAttribute("href");
 
         ((JavascriptExecutor)driver).executeScript("window.open()");;
         ArrayList<String> tabs = new ArrayList<> (driver.getWindowHandles());
@@ -58,35 +73,40 @@ public class GardenAndOutdoors extends HomePage {
     }
 
     public boolean isTitleCorrect() throws Exception {
-        return verifyTitle(driver.findElement(By.xpath(pageTitle)).getText(), TITLE);
+        return verifyTitle(pageTitle.getText(), TITLE);
     }
 
     public boolean isGlobalStore() {
-        return driver.findElement(By.xpath(globalStore)) != null;
+        return globalStore != null;
     }
 
     public boolean isAverageCustomerReviewDisplayed() {
-        return driver.findElement(By.xpath(avgCustomerReviews)) != null;
+        return avgCustomerReviews != null;
     }
 
     public boolean isTitleAndMenuLinkEqual() throws Exception {
-        return verifyTitle(driver.findElement(By.xpath(pageTitle)).getText(), driver.findElement(By.xpath(tabHeader)).getText());
+        return verifyTitle(pageTitle.getText(), tabHeader.getText());
     }
 
     public void makePrimeCheckboxChecked() {
-        driver.findElement(By.xpath(primeCheckbox)).click();
+        primeCheckbox.click();
     }
 
     public boolean isOnlyPrimeItems() {
         makePrimeCheckboxChecked();
 
-        List<WebElement> products = driver.findElements(By.xpath(primeResultsList));
+        List<WebElement> products = primeResultsList;
         for (WebElement product: products) {
-            if (!(product.findElement(By.xpath(primeLabelOrMoreBuyingChoices)).isDisplayed())) {
+            if (!(primeLabelOrMoreBuyingChoices.isDisplayed())) {
                 return false;
             }
         }
 
         return true;
     }
+
+    //TODO - BELOW
+    //Click highest avg customer review rating
+    //order by rating
+    //check orders are in order of rating
 }
