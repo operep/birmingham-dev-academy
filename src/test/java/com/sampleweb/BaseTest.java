@@ -50,8 +50,7 @@ public abstract class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void setupBaseTest() throws Exception {
         System.out.println(isLocal());
-        dr = DesiredCapabilities.firefox();
-        dr.setCapability("browser.tabs.remote.autostart", false);
+        dr = DesiredCapabilities.chrome();
         if(isLocal().equals("true")){
 //            driver = new ChromeDriver();
             driver = new RemoteWebDriver(new URL(gridLocalUrl()), dr);
