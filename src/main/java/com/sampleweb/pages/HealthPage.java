@@ -13,9 +13,9 @@ public class HealthPage extends HomePage {
 
     private String title = "Health & Personal Care";
     private PageNavigator navigator = new PageNavigator();
-    private static String PATH = "https://www.amazon.co.uk/health-beauty-haircare-wellbeing-dentalcare-shaving-hairremoval/b/?ie=UTF8&node=65801031&ref_=topnav_storetab_d";
+    private static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Ddrugstore&field-keywords=";
 
-    @FindBy(xpath = "//h1[text()='Health & Personal Care']")
+    @FindBy(xpath = "//*[@id=\"merchandised-content\"]/div[1]/div[1]/div/h1[text()='Health & Personal Care']")
     private WebElement healthPageTitle;
 
     @FindBy(xpath = "//*[@id=\"nav-subnav\"]/a[1]/span")
