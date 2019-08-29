@@ -43,12 +43,20 @@ public class HealthPageTests extends BaseTest {
     }
 
     @Test(groups = "regression")
-    public void healthValidateNavigationRedirectsCorrectlyTest() throws Exception{
+    public void healthEnsureHeaderTitleIsCorrectTest() throws Exception {
         assertThat(healthPage.verifyFirstLinkHasCatagoryName(), is(true));
+    }
+
+    @Test(groups = "regression")
+    public void healthValidateNavigationRedirectsCorrectlyTest() throws Exception{
+        assertThat(healthPage.verifyClickOnHeaderMenuDirectsToSamePage(), is(true));
     }
 
     @Test(groups = "regression")
     public void ensureAllPrimeItemsLabelledTest() throws Exception{
         assertThat(healthPage.verifySelectPrimeReturnsOnlyPrimeitems(), is (true));
     }
+
+    @Test(groups = "regression")
+
 }
