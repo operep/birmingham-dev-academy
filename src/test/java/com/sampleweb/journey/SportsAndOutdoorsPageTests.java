@@ -37,4 +37,8 @@ public class SportsAndOutdoorsPageTests extends BaseTest {
     @Test (groups = "regression")
     public void sportsAndOutdoorsPrimeOrMoreBuyingChoicesTest() { assertThat(sportsAndOutdoorsPage.primeOrMoreBuyingChoicesExists(), is(true)); }
 
+    //Write later
+//    @Test (groups = "regression")
+//    public void sportsAndOutdoorsRatingThresholdCheck(){ (true, is(true)); }
+
 }
