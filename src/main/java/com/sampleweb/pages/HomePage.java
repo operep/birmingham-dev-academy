@@ -11,6 +11,7 @@ public class HomePage extends Page {
 
     protected RemoteWebDriver driver;
     protected String searchBoxLocator = "//input[@id='twotabsearchtextbox']";
+    public static String PATH = "https://www.amazon.co.uk/ref=nav_logo";
 
     @FindBy(xpath = "//input[@type='submit']")
     protected WebElement submitButtonLocator;
