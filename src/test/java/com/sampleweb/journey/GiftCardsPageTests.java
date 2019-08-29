@@ -53,4 +53,9 @@ public class GiftCardsPageTests extends BaseTest {
         assertThat(giftCardsPage.verifyPrimeCheckboxResultsList(), is(true));
     }
 
+    @Test(groups="regression")
+    public void giftCardsStarRatingOrderCorrect(){
+        assertThat(giftCardsPage.verifyFourStarRatingOrderCorrect(), is(true));
+    }
+
 }
