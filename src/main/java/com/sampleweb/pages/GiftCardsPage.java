@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
+
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class GiftCardsPage extends HomePage {
     @FindBy(xpath = "//*[@id='nav-subnav']/a[1]")
     private WebElement pageTitle;
 
+
     public GiftCardsPage(RemoteWebDriver driver) {
         super(driver);
     }
@@ -39,6 +41,7 @@ public class GiftCardsPage extends HomePage {
     public boolean isPageLoaded() {
         selectGiftCardsFromDropdown();
         return pageTitle.isDisplayed();
+
     }
 
     /**
