@@ -7,6 +7,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import javax.xml.xpath.XPath;
+import java.nio.file.WatchEvent;
 import java.util.List;
 
 public class HealthPage extends HomePage {
@@ -41,6 +42,21 @@ public class HealthPage extends HomePage {
 
     @FindBy(xpath = "//*[@class='a-section aok-relative s-image-fixed-height']")
     private List<WebElement> healthPagePrimeImages;
+
+    @FindBy(xpath = "//*[@id='leftNav']/ul[9]/div/li[1]")
+    private WebElement fourStarReviewButton;
+
+    @FindBy(xpath = "//*[@id=\"a-autoid-0-announce\"]")
+    private WebElement sortByButton;
+
+    @FindBy(xpath = "//*[@id='s-result-sort-select_3']")
+    private WebElement sortByReviewButton;
+
+    @FindBy(xpath = "//*[@class='a-icon-alt'][contains(text(), 'out of')]")
+    private List<WebElement> ratings;
+
+    @FindBy(xpath = "//*[@class='a-size-base']")
+    private List<WebElement> reviews;
 
     private String primeIcon = "//*[@class='a-icon a-icon-prime a-icon-medium']";
 
@@ -95,13 +111,39 @@ public class HealthPage extends HomePage {
 
         return isDisplayed;
     }
-}
 
-//    public boolean verifyAverageRatingsSortedCorrectly() throws Exception {
-//        navigateToHealthPage();
-//        driver.findElementByXPath("//*[@id='leftNav']/ul[9]/div/li[1]/span/a/span").click();
-//        driver.findElementByXPath("//*[@id='a-autoid-0-announce']/span[1]").click();
-//        driver.findElementByXPath("//*[@id='s-result-sort-select_3']").click();
-//        driver.findElementByXPath("//*[@id='search']/div[1]/div[2]/div/span[3]/div[1]/div[1]/div/div/div/div[2]/div[2]/div/div[1]/div/div/div[2]/div/span/a/i[1]/span").click();
-//        driver.findElementsByXPath("//*[@class='a-icon-alt']").iterator().next().getText().
- //   }
+    public boolean verifyAverageRatingsSortedCorrectly() throws Exception {
+        navigateToHealthPage();
+        fourStarReviewButton.click();
+        sortByButton.click();
+        sortByReviewButton.click();
+
+        double newStarRating;
+        double oldStarRating = Double.parseDouble(ratings.get(0).getAttribute("innerText").substring(0,3));
+        int oldReviewRating = Integer.parseInt(reviews.get(0).getAttribute("innerText"));
+        int newReviewRating;
+        boolean correctOrder = false;
+
+
+        for (WebElement rating: ratings){
+            System.out.println("work?" + rating.getAttribute("innerText").substring(0, 3));
+            newStarRating = Double.parseDouble(rating.getAttribute("innerText").substring(0, 3));
+            newReviewRating = Integer.parseInt(reviews.get(ratings.indexOf(rating)).getAttribute("innerText"));
+
+            if(newStarRating <= oldStarRating) {
+                correctOrder = true;
+
+            }
+            else if(newReviewRating <= oldReviewRating){
+                correctOrder = true;
+            }
+            else{
+                return false;
+            }
+
+            oldStarRating = newStarRating;
+            oldReviewRating = newReviewRating;
+        }
+        return correctOrder;
+    }
+}

@@ -52,6 +52,9 @@ public class HealthPageTests extends BaseTest {
         assertThat(healthPage.verifySelectPrimeReturnsOnlyPrimeitems(), is (true));
     }
 
-    //@Test(groups = "regression")
+    @Test(groups = "regression")
+    public void ensureStarRatingsOrderedCorrectlyTest() throws Exception{
+        assertThat(healthPage.verifyAverageRatingsSortedCorrectly(), is (true));
+    }
 
 }
