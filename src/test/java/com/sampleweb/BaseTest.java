@@ -1,8 +1,11 @@
 package com.sampleweb;
 
 import com.sampleweb.listeners.TestListener;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -47,10 +50,10 @@ public abstract class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void setupBaseTest() throws Exception {
         System.out.println(isLocal());
-        dr = DesiredCapabilities.chrome();
+        dr = DesiredCapabilities.firefox();
         if(isLocal().equals("true")){
-            driver = new ChromeDriver();
-//            driver = new RemoteWebDriver(new URL(gridLocalUrl()), dr);
+//            driver = new ChromeDriver();
+            driver = new RemoteWebDriver(new URL(gridLocalUrl()), dr);
         } else {
             driver = new RemoteWebDriver(new URL(gridUrl()), dr);
         }
