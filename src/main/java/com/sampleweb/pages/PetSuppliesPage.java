@@ -3,15 +3,28 @@ package com.sampleweb.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class PetSuppliesPage extends HomePage{
 
     public String title = "Pet Supplies";
-    public String pageTitle = "//h1[text()=\"" + title + "\"]";
+    @FindBy(xpath = "//h1[text()=\"Pet Supplies\"]")
+    public WebElement pageTitle ;
+    @FindBy(xpath = "//*[@id='leftNav']/h4[contains(text(), 'Global Store')]")
+    public WebElement globalStoreTitle;
+    @FindBy(xpath = "//*[@id='leftNav']/h4[contains(text(), 'Customer Review')]")
+    public WebElement customerReviewTitle;
+    @FindBy(xpath = "//*[@id='leftNav']/h4[contains(text(), 'Customer Review')]/following-sibling::ul[1]/div/li")
+    public List<WebElement> customerReviewStarList;
     public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Dpets&field-keywords=";
-    public String firstLinkInSecondMenu = "//*[@id=\"nav-subnav\"]/a[1]/span";
+    @FindBy(xpath = "//*[@id=\"nav-subnav\"]/a[1]/span")
+    public WebElement firstLinkInSecondMenu;
+
+    @FindBy(xpath = "//*[@id=\"leftNav\"]/ul[6]/div/li[1]/span/span/div/label/span/i")
+    public WebElement primeCheckbox;
     public String primeElement = "//*[@class=\"a-icon a-icon-prime a-icon-medium\"]";
     public String moreBuyingOptions = "//span[contains(text(), \"More buying choices\")]";
     public String primeOrMoreOptions = primeElement + " | " + moreBuyingOptions;
@@ -20,7 +33,7 @@ public class PetSuppliesPage extends HomePage{
     }
 
     public boolean isLoaded() {
-        return driver.findElement(By.xpath(pageTitle)).isDisplayed();
+        return pageTitle.isDisplayed();
     }
 
     public PetSuppliesPage setSearchCriteria(String searchText) {
@@ -29,33 +42,38 @@ public class PetSuppliesPage extends HomePage{
     }
 
     public boolean isGlobalStoreCheckboxDisplayed(){
-        return driver.findElementByXPath("//*[@id='leftNav']/h4[contains(text(), 'Global Store')]") != null;
+        return globalStoreTitle != null;
     }
 
     public boolean isAverageCustomerRatingTitleDisplayed(){
-        return driver.findElementByXPath("//*[@id='leftNav']/h4[contains(text(), 'Customer Review')]") != null;
+        return customerReviewTitle != null;
     }
 
     public boolean isAverageCustomerRatingFieldsDisplayed(){
-        return driver.findElementsByXPath("//*[@id='leftNav']/h4[contains(text(), 'Customer Review')]/following-sibling::ul[1]/div/li").size() == 4;
+        return customerReviewStarList.size() == 4;
     }
 
     public boolean isFirstLinkInSecondMenuSameAsTitleTest(){
-        return driver.findElementByXPath(firstLinkInSecondMenu).getText().equals("Pet Supplies");
+        return firstLinkInSecondMenu.getText().equals("Pet Supplies");
     }
 
     public void clickOnFirstLinkInSecondMenu(){
-        driver.findElementByXPath(firstLinkInSecondMenu).click();
+        firstLinkInSecondMenu.click();
     }
 
     public void clickOnPrimeCheckbox(){
-        driver.findElementByXPath("//*[@id=\"leftNav\"]/ul[6]/div/li[1]/span/span/div/label/span/i").click();
+        primeCheckbox.click();
     }
 
     public boolean checkOnlyPrimeItemsAreAvailable(){
-        //Not Finished
-        List<WebElement> results = driver.findElementsByXPath("//*[@id=\"search\"]/div[1]/div[2]/div/span[3]/div[1]");
-        return results.iterator().next().findElement(By.xpath(primeOrMoreOptions)).isDisplayed();
+        Iterator<WebElement> resultsIterator = driver.findElementsByXPath("//*[@id=\"search\"]/div[1]/div[2]/div/span[3]/div[1]/div").iterator();
+        int count = 0;
+        while(resultsIterator.hasNext()){
+            WebElement result = resultsIterator.next();
+            if(!result.findElement(By.xpath(primeOrMoreOptions)).isDisplayed())
+                return false;
+        }
+        return true;
     }
 
 
