@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BabyPage extends HomePage {
 
@@ -31,6 +31,18 @@ public class BabyPage extends HomePage {
 
     @FindBy(xpath="//div[@class=\"s-result-list s-search-results sg-row\"]/*")
     public List<WebElement> searchResults;
+
+    @FindBy(xpath="//parent::span[text()=\"4 Stars & Up\"]/..")
+    public WebElement fourStartAndUpOptionElements;
+
+    @FindBy(xpath = "//parent::span[@class=\"a-dropdown-label\" and text()=\"Sort by:\"]")
+    public WebElement sortByDropDown;
+
+    @FindBy(xpath="//a[@class=\"a-dropdown-link\" and text()=\"Avg. Customer Review\"]")
+    public WebElement avgCustomerReviewDropDownOption;
+
+    @FindBy(xpath="//div[@class=\"a-row a-size-small\"]/span/a/i/span[@class=\"a-icon-alt\"]")
+    public List<WebElement> reviewLabel;
 
     public BabyPage(RemoteWebDriver driver) {
         super(driver);
@@ -59,4 +71,26 @@ public class BabyPage extends HomePage {
         System.out.println(size);
         return prevSize == size;
     }
+
+    public boolean click4StartAndUp() {
+        navigateToBabyPageViaDropDown();
+        fourStartAndUpOptionElements.click();
+        sortByDropDown.click();
+        avgCustomerReviewDropDownOption.click();
+        List<Float> original = reviewLabel.stream()
+                .map(e -> Float.parseFloat(e.getAttribute("innerHTML").split(" ")[0].trim()))
+                .collect(Collectors.toList());
+        List<Float> sorted = original.stream()
+                .sorted()
+                .collect(Collectors.toList());
+        for (int i = 0; i < original.size(); i++) {
+            if (!original.get(i).equals(sorted.get(i)))
+                return false;
+        }
+
+        return true;
+
+    }
+
+
 }

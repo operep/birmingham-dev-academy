@@ -48,7 +48,12 @@ public class BabyPageTests extends BaseTest {
     }
 
     @Test (groups = "regression")
-    public void checkPrimeLabelsTest() throws Exception {
+    public void checkPrimeLabelsTest() {
         assertThat(babyPage.checkPrimeLabels(), is(true));
+    }
+
+    @Test (groups = "regression")
+    public void checkAvgReviewInOrder() {
+        assertThat(babyPage.click4StartAndUp(), is(true));
     }
 }
