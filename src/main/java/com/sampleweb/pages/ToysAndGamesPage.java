@@ -29,10 +29,10 @@ public class ToysAndGamesPage extends HomePage {
         clickSubmitButton();
     }
 
-    public ToysAndGamesPage getTitle() {
-        driver.findElementByXPath(pageTitle);
-        return this;
-    }
+//    public ToysAndGamesPage getTitle() {
+//        driver.findElementByXPath(pageTitle);
+//        return this;
+//    }
 
     public boolean verifyGlobalStore() {
         return driver.findElementByXPath("//*[@id=\"leftNav\"]/ul[5]/div/li/span/span/div/label/span/span/img") != null;
