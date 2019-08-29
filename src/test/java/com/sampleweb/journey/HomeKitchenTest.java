@@ -47,4 +47,11 @@ public class HomeKitchenTest extends BaseTest {
         assertThat(homeKitchen.isPrimeCorrect(), is(true));
     }
 
+    @Test(groups = "regression")
+    public void isSortCorrectTest() throws Exception {
+        setUp();
+        assertThat(homeKitchen.checkSort(), is(true));
+    }
+
+
 }
