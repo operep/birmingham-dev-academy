@@ -2,9 +2,11 @@ package com.sampleweb.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GardenAndOutdoors extends HomePage {
 
@@ -15,7 +17,7 @@ public class GardenAndOutdoors extends HomePage {
     private String globalStore = "//img[@class='s-ref-img-sprite']";
     private String avgCustomerReviews = "//h4[contains(text(),'Avg. Customer Review')]";
     private String primeCheckbox = "//input[@name='s-ref-checkbox-419158031']";
-    private String primeResultsList = "//div[@class='s-result-list s-search-results sg-row']";
+    private String primeResultsList = "//div[@class='s-result-list s-search-results sg-row']/div";
     private String primeLabelOrMoreBuyingChoices = "//*[@aria-label='Amazon Prime' or @class='a-size-base a-color-secondary']";
 
     public static String TITLE = "Garden & Outdoors";
@@ -78,6 +80,13 @@ public class GardenAndOutdoors extends HomePage {
     public boolean isOnlyPrimeItems() {
         makePrimeCheckboxChecked();
 
-        return driver.findElements(By.xpath(primeResultsList)).iterator().next().findElement(By.xpath(primeLabelOrMoreBuyingChoices)).isDisplayed();
+        List<WebElement> products = driver.findElements(By.xpath(primeResultsList));
+        for (WebElement product: products) {
+            if (!(product.findElement(By.xpath(primeLabelOrMoreBuyingChoices)).isDisplayed())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
