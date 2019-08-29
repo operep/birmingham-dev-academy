@@ -3,11 +3,12 @@ package com.sampleweb.journey;
 import com.sampleweb.BaseTest;
 import com.sampleweb.framework.PageNavigator;
 import com.sampleweb.pages.ElectronicsPhotoPage;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.hamcrest.core.Is.is;
+
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class ElectronicsPhotoTests extends BaseTest {
 
@@ -32,7 +33,6 @@ public class ElectronicsPhotoTests extends BaseTest {
         assertThat(electronicsPhotoPage.isElectronicsCategorySelected(), is(true));
     }
 
-    // checks if the loaded page is The Electronics Store
     @Test(groups = "regression")
     public void electronicsPhotoNavigationPageTest() throws Exception {
         isInitialTest = true;
@@ -69,4 +69,28 @@ public class ElectronicsPhotoTests extends BaseTest {
         setUp();
         electronicsPhotoPage.checkPrimeLabels();
     }
+
+    @Test(groups = "regression")
+    public void fiveStartsReviewsTest() throws Exception {
+        setUp();
+        assertThat(electronicsPhotoPage.isFiveStarsSelected(), is(true));
+    }
+
+    @Test(groups = "regression")
+    public void avgCustomerReviewSortSelectionTest() throws Exception{
+        setUp();
+        assertThat(electronicsPhotoPage.isAvgCustomerReviewSortSelected(), is(true));
+    }
+
+    @Test(groups = "regression")
+    public void ratingSortByStarsTest() throws Exception {
+        setUp();
+        float prevScore = 5.0f;
+
+        for (float currScore : electronicsPhotoPage.getReviewScores()) {
+            assertThat(currScore, lessThanOrEqualTo(prevScore));
+            prevScore = currScore;
+        }
+    }
+
 }

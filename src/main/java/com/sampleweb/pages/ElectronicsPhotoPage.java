@@ -5,11 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import javax.ws.rs.HEAD;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ElectronicsPhotoPage extends HomePage {
-    
+
     private String title = "Electronics & Photo";
     public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Delectronics&field-keywords=";
     public static String HOME_PATH = "https://www.amazon.co.uk/ref=nav_logo";
@@ -35,6 +35,22 @@ public class ElectronicsPhotoPage extends HomePage {
     protected String listOfElements = "//*[@class='s-result-list s-search-results sg-row']/div";
     protected String labelsInDescription = "//*[@aria-label='Amazon Prime' or text()='FREE Delivery by Amazon']";
 
+    @FindBy(xpath = "//*[@class='a-icon a-icon-star-medium a-star-medium-4']")
+    protected WebElement fiveStarsReviews;
+
+    @FindBy(xpath = "//*[@class=\'a-color-state a-text-bold\' and contains(text(), \'4 Stars & Up\')]")
+    protected WebElement fourStartsAndUpTitle;
+
+    @FindBy(xpath = "//*[@class=\"aok-inline-block a-spacing-none\"]")
+    protected WebElement sortDropdown;
+
+    @FindBy(xpath = "//*[@id='s-result-sort-select_3' and contains(text(), \"Avg. Customer Review\")]")
+    protected WebElement sortDropdownAvgCustomerReview;
+
+    @FindBy(xpath = "//*[@class=\"a-dropdown-prompt\"]")
+    protected WebElement currentSortCriteria;
+
+    protected String reviewList = "//*[@class='s-result-list s-search-results sg-row']//span[@class='a-icon-alt']";
 
     public ElectronicsPhotoPage(RemoteWebDriver driver) {
         super(driver);
@@ -45,7 +61,6 @@ public class ElectronicsPhotoPage extends HomePage {
         return electronicsCategoryDropdown.isSelected();
     }
 
-    // 1
     public boolean isPageLoaded(){
         return pageTitle.isDisplayed();
     }
@@ -72,21 +87,71 @@ public class ElectronicsPhotoPage extends HomePage {
 
     // 6
     public void checkPrimeLabels(){
-        checkPrimeCheckbox();
+        selectPrimeCheckbox();
         for (WebElement el : getListings()) {
             el.findElement(By.xpath(labelsInDescription));
         }
+    }
+
+    // 7
+    public boolean isFiveStarsSelected(){
+        selectFiveStarsCriteria();
+        return fourStartsAndUpTitle.isDisplayed();
+    }
+
+    public boolean isAvgCustomerReviewSortSelected(){
+        selectAvgCustomerReviewSortCriteria();
+        return currentSortCriteria.getText().equals("Avg. Customer Review");
+    }
+
+    public List<Float> getReviewScores() {
+        setUpForReviewChecking();
+        List<Float> list = new ArrayList<>();
+
+        for (WebElement el : getReviewList()) {
+            Float rev = Float.valueOf(el.getAttribute("innerHTML").split(" ")[0]);
+            list.add(rev);
+        }
+        return list;
     }
 
     /*
     helper functions
      */
 
+    private List<WebElement> getReviewList(){
+        return driver.findElements(By.xpath(reviewList));
+    }
+
+    // setup for the selecting 4 starts and up and sort by avg. customer review
+    public void setUpForReviewChecking(){
+        selectAvgCustomerReviewSortCriteria();
+    }
+
+    // select Avg. Customer Review as sort criteria
+    private void selectAvgCustomerReviewSortCriteria(){
+        selectSortByDropdown();
+        sortDropdownAvgCustomerReview.click();
+    }
+
+    // select drop down for sorting to see sorting options
+    private void selectSortByDropdown(){
+        selectFiveStarsCriteria();
+        sortDropdown.click();
+    }
+
+    // select 4 stars and up criteria
+    private void selectFiveStarsCriteria(){
+        fiveStarsReviews.click();
+    }
+
+    // get listings on page
     private List<WebElement> getListings(){
         return driver.findElements(By.xpath(listOfElements));
     }
 
-    private void checkPrimeCheckbox(){
+    // select prime checkbox
+    private void selectPrimeCheckbox(){
         primeCheckbox.click();
     }
 
