@@ -23,7 +23,7 @@ public class PCVideoGamesPage extends HomePage {
   private WebElement dropDown;
 
   @FindBy(xpath = "//h4[text()='Global Store']")
-  private WebElement globalStore;
+  private WebElement globalStoreHeader;
 
   @FindBy(xpath = "//h4[text()='Avg. Customer Review']")
   private WebElement avgReviewHeader;
@@ -65,7 +65,7 @@ public class PCVideoGamesPage extends HomePage {
   }
 
   public boolean hasGlobal() {
-    return globalStore.isDisplayed();
+    return globalStoreHeader.isDisplayed();
   }
 
   public boolean hasAvgReview() {
