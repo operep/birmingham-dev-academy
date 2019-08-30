@@ -4,8 +4,8 @@ public class Product implements Comparable<Product> {
 
     private String name;
     private String path;
-    private int amountOfReviews;
-    private int overallRating;
+    private double amountOfReviews;
+    private double overallRating;
     private double fiveStarRatings;
     private double fourStarRatings;
     private double threeStarRatings;
@@ -14,10 +14,10 @@ public class Product implements Comparable<Product> {
 
     public int compareTo(Product compareProduct) {
         //TODO - FIGURE OUT AMAZON SORT ALGORITHM
-        int compareOverallRating = ((Product) compareProduct).getOverallRating();
+        double compareOverallRating = ((Product) compareProduct).getOverallRating();
 
         //descending order
-        return compareOverallRating - this.overallRating;
+        return (int) compareOverallRating - (int) this.overallRating;
     }
 
     public String getName() {
@@ -36,19 +36,19 @@ public class Product implements Comparable<Product> {
         this.path = path;
     }
 
-    public int getAmountOfReviews() {
+    public double getAmountOfReviews() {
         return amountOfReviews;
     }
 
-    public void setAmountOfReviews(int amountOfReviews) {
+    public void setAmountOfReviews(double amountOfReviews) {
         this.amountOfReviews = amountOfReviews;
     }
 
-    public int getOverallRating() {
+    public double getOverallRating() {
         return overallRating;
     }
 
-    public void setOverallRating(int overallRating) {
+    public void setOverallRating(double overallRating) {
         this.overallRating = overallRating;
     }
 

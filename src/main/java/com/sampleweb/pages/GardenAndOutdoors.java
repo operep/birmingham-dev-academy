@@ -3,6 +3,7 @@ package com.sampleweb.pages;
 import com.sampleweb.models.Product;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import java.lang.Exception;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -42,6 +43,27 @@ public class GardenAndOutdoors extends HomePage {
 
     @FindBy(xpath = "//*[@aria-label='Amazon Prime' or @class='a-size-base a-color-secondary']")
     protected WebElement primeLabelOrMoreBuyingChoices;
+
+    @FindBy(xpath = "//h2[contains(text(),'customer reviews')]")
+    protected WebElement amountOfReviews;
+
+    @FindBy(xpath = "//span[@class='arp-rating-out-of-text a-color-base']")
+    protected WebElement overallRating;
+
+    @FindBy(xpath = "//a[@class='a-size-base a-link-normal 5star histogram-review-count a-color-secondary']")
+    protected WebElement fiveStarRatings;
+
+    @FindBy(xpath = "//a[@class='a-size-base a-link-normal 4star histogram-review-count a-color-secondary']")
+    protected WebElement fourStarRatings;
+
+    @FindBy(xpath = "//a[@class='a-size-base a-link-normal 3star histogram-review-count a-color-secondary']")
+    protected WebElement threeStarRatings;
+
+    @FindBy(xpath = "//a[@class='a-size-base a-link-normal 2star histogram-review-count a-color-secondary']")
+    protected WebElement twoStarRatings;
+
+    @FindBy(xpath = "//a[@class='a-size-base a-link-normal 1star histogram-review-count a-color-secondary']")
+    protected WebElement oneStarRatings;
 
     public static String TITLE = "Garden & Outdoors";
     public static String PATH = "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Doutdoor&field-keywords=";
@@ -122,26 +144,51 @@ public class GardenAndOutdoors extends HomePage {
     }
 
     private List<Product> initProductItemsFromItemList() {
-        List<Product> products = null;
+        ArrayList<Product> products = new ArrayList<Product>();
         List<WebElement> xpathProducts = itemResultsList;
 
         for (WebElement product: xpathProducts) {
-            WebElement p1 = product;
             Product p = new Product();
-            p.setName(p1.findElement(By.xpath("//span[contains(text(),'Dokon Rectangular Garden Table Cover, Waterproof B')]")).getText());
-            p.setPath(p1.findElement(By.xpath("//span[contains(text(),'Dokon Rectangular Garden Table Cover, Waterproof B')]/parent::a")).getAttribute("href"));
+            p.setName(product.findElement(By.xpath(".//span[@class='a-size-medium a-color-base a-text-normal']")).getText());
+            p.setPath(product.findElement(By.xpath(".//span[@class='a-size-medium a-color-base a-text-normal']/parent::a")).getAttribute("href"));
 
             openNewTab(p.getPath());
 
-            //TODO - find values below
-            p.setAmountOfReviews(0);
-            p.setOverallRating(0);
-            p.setFiveStarRatings(0);
-            p.setFourStarRatings(0);
-            p.setThreeStarRatings(0);
-            p.setTwoStarRatings(0);
-            p.setOneStarRatings(0);
-            // //h2[contains(text(),'customer reviews')] - then split this to find 1st string
+            p.setAmountOfReviews(formatAmountOfReviewsAndOverallRating(amountOfReviews.getText()));
+            p.setOverallRating(formatAmountOfReviewsAndOverallRating(overallRating.getText()));
+
+            try {
+                p.setFiveStarRatings(formatStarRatings(fiveStarRatings.getText()));
+            } catch (Exception e) {
+                p.setFiveStarRatings(0);
+            }
+
+            try {
+                p.setFourStarRatings(formatStarRatings(fourStarRatings.getText()));
+            } catch (Exception e) {
+                p.setFourStarRatings(0);
+            }
+
+            try {
+                p.setThreeStarRatings(formatStarRatings(threeStarRatings.getText()));
+            } catch (Exception e) {
+                p.setThreeStarRatings(0);
+            }
+
+            try {
+                p.setTwoStarRatings(formatStarRatings(twoStarRatings.getText()));
+            } catch (Exception e) {
+                p.setTwoStarRatings(0);
+            }
+
+            try {
+                p.setOneStarRatings(formatStarRatings(oneStarRatings.getText()));
+            } catch (Exception e) {
+                p.setOneStarRatings(0);
+            }
+
+            closeNewTab();
+
             products.add(p);
         }
 
@@ -161,7 +208,18 @@ public class GardenAndOutdoors extends HomePage {
     }
 
     private void closeNewTab() {
-        driver.switchTo().window(tabs.get(0)); // switch back to main screen
-        driver.switchTo().window(tabs.remove(1));
+        driver.switchTo().window(tabs.get(1)).close();
+        driver.switchTo().window(tabs.get(0));
+    }
+
+    private double formatAmountOfReviewsAndOverallRating(String preFormattedAmountOfReviews) {
+        return Double.parseDouble(preFormattedAmountOfReviews.split(" ")[0]);
+    }
+
+    private double formatStarRatings(String preFormattedStarRatings) {
+        if (preFormattedStarRatings == null) {
+            return 0;
+        }
+        return Double.parseDouble(preFormattedStarRatings.trim().replace("%", ""));
     }
 }
