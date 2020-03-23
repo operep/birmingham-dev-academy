@@ -6,9 +6,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class PageNavigator {
 
-    public <T extends Page> T navigateToBabyProductsPage(RemoteWebDriver driver, Class<T> clazz) throws Exception {
+    public <T extends Page> T navigateToSportsAndOutdoorsPage(RemoteWebDriver driver, Class<T> clazz) throws Exception {
         driver.findElement(By.xpath("//span[contains(text(), 'Department')]")).click();
-        driver.findElement(By.xpath("//li//a[text()=\"Children's Books\"]")).click();
+        driver.findElement(By.xpath("//li//a[text()=\"Sports & Outdoors\"]")).click();
         return PageFactory.newPage(driver, clazz);
     }
 
